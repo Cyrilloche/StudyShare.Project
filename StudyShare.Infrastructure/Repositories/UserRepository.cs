@@ -15,7 +15,7 @@ namespace StudyShare.Domain.Repositories
 
         public async Task<User> CreateUser(User user)
         {
-            await _context.AddAsync(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return user;
         }
@@ -25,8 +25,8 @@ namespace StudyShare.Domain.Repositories
             User user = await GetUserById(id);
             if (user != null)
             {
-                _context.Remove(user);
-                _context.SaveChangesAsync();
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
             }
         }
 

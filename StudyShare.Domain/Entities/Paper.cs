@@ -9,6 +9,7 @@ namespace StudyShare.Domain.Entities
         public DateTime PaperUploadDate { get; set; }
         public int PaperDownloadsNumber { get; set; }
         public bool PaperVisibility { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
 

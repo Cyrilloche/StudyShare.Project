@@ -11,6 +11,7 @@ namespace StudyShare.Infrastructure.Interfaces
         Task<Paper> CreatePaper(Paper paper);
         Task DeletePaper(int id);
         Task<List<Paper>> GetAllPapers();
+        Task<List<Paper>> GetPaperByAuthor(int userId);
         Task<Paper> GetPaperById(int id);
         Task<Paper> UpdatePaper(int id, Paper paper);
     }
