@@ -12,7 +12,6 @@ namespace StudyShare.Infrastructure.EntityConfig
             builder.Property(p => p.PaperName).IsRequired();
             builder.Property(p => p.PaperDescription);
             builder.Property(p => p.PaperPath).IsRequired();
-            builder.Property(p => p.PaperAuthor).IsRequired();
             builder.Property(p => p.PaperUploadDate).IsRequired();
             builder.Property(p => p.PaperDownloadsNumber).IsRequired();
             builder.Property(p => p.PaperVisibility).IsRequired();
@@ -20,7 +19,7 @@ namespace StudyShare.Infrastructure.EntityConfig
             // Create one to many relationship between User and Paper
             builder.HasOne<User>(p => p.User)
             .WithMany(u => u.Paper)
-            .HasForeignKey(p => p.PaperId);
+            .HasForeignKey(p => p.UserId);
 
 
         }

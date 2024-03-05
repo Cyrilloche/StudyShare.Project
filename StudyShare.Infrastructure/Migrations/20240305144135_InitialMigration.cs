@@ -83,21 +83,22 @@ namespace StudyShare.Infrastructure.Migrations
                 name: "Papers",
                 columns: table => new
                 {
-                    PaperId = table.Column<int>(type: "int", nullable: false),
+                    PaperId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PaperName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaperDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaperPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaperAuthor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaperUploadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PaperDownloadsNumber = table.Column<int>(type: "int", nullable: false),
-                    PaperVisibility = table.Column<bool>(type: "bit", nullable: false)
+                    PaperVisibility = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Papers", x => x.PaperId);
                     table.ForeignKey(
-                        name: "FK_Papers_tbl_user_PaperId",
-                        column: x => x.PaperId,
+                        name: "FK_Papers_tbl_user_UserId",
+                        column: x => x.UserId,
                         principalTable: "tbl_user",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -237,6 +238,11 @@ namespace StudyShare.Infrastructure.Migrations
                 name: "IX_PaperKeywords_KeywordId",
                 table: "PaperKeywords",
                 column: "KeywordId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Papers_UserId",
+                table: "Papers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClassLevels_ClassLevelId",

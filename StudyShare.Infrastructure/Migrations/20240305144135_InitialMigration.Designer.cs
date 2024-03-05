@@ -12,7 +12,7 @@ using StudyShare.Infrastructure.Database;
 namespace StudyShare.Infrastructure.Migrations
 {
     [DbContext(typeof(StudyShareDbContext))]
-    [Migration("20240305133716_InitialMigration")]
+    [Migration("20240305144135_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -62,11 +62,10 @@ namespace StudyShare.Infrastructure.Migrations
             modelBuilder.Entity("StudyShare.Domain.Entities.Paper", b =>
                 {
                     b.Property<int>("PaperId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("PaperAuthor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaperId"));
 
                     b.Property<string>("PaperDescription")
                         .HasColumnType("nvarchar(max)");
@@ -88,7 +87,12 @@ namespace StudyShare.Infrastructure.Migrations
                     b.Property<bool>("PaperVisibility")
                         .HasColumnType("bit");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("PaperId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Papers");
                 });
@@ -245,7 +249,7 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     b.HasOne("StudyShare.Domain.Entities.User", "User")
                         .WithMany("Paper")
-                        .HasForeignKey("PaperId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
