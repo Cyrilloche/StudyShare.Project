@@ -39,8 +39,7 @@ namespace StudyShare.Infrastructure.Repositories
         public async Task<List<Paper>> GetPaperByAuthor(int userId)
         {
             List<Paper> papers = await GetAllPapers();
-            papers.FindAll(u => u.UserId == userId);
-            return papers;
+            return papers.FindAll(u => u.UserId == userId);
         }
 
         public async Task<Paper> GetPaperById(int id)
