@@ -47,16 +47,16 @@ namespace StudyShare.Infrastructure.Repositories
             return await _context.Papers.FirstOrDefaultAsync(p => p.PaperId == id);
         }
 
-        public async Task<Paper> UpdatePaper(int id, Paper currentPaper)
+        public async Task<Paper> UpdatePaper(int id, Paper updatePaper)
         {
             Paper paper = await GetPaperById(id);
             if (paper != null)
             {
                 paper.PaperName = paper.PaperName;
-                paper.PaperDescription = currentPaper.PaperDescription;
-                paper.PaperKeyword = currentPaper.PaperKeyword;
-                paper.PaperClassLevel = currentPaper.PaperClassLevel;
-                paper.PaperVisibility = currentPaper.PaperVisibility;
+                paper.PaperDescription = updatePaper.PaperDescription;
+                paper.PaperKeyword = updatePaper.PaperKeyword;
+                paper.PaperClassLevel = updatePaper.PaperClassLevel;
+                paper.PaperVisibility = updatePaper.PaperVisibility;
 
                 await _context.SaveChangesAsync();
                 return paper;
