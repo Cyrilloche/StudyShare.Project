@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using StudyShare.Infrastructure.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,10 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// builder.Services.AddDbContextPool<MON__PROJET>(options =>
-//         {
-//             options.UseSqlServer(@"Server=.; Database=StudyShareDB; Trusted_Connection=True; Encrypt=False;");
-//         });
+builder.Services.AddDbContextPool<StudyShareDbContext>(options =>
+        {
+            options.UseSqlServer(@"Server=.; Database=StudyShareDB; Trusted_Connection=True; Encrypt=False;");
+        });
 
 var app = builder.Build();
 
@@ -29,6 +32,5 @@ app.UseCors(opt =>
 });
 
 app.UseHttpsRedirection();
-
-
+app.MapControllers();
 app.Run();
