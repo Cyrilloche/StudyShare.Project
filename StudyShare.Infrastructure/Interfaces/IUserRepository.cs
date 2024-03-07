@@ -12,6 +12,6 @@ namespace StudyShare.Domain.Interfaces
         Task DeleteUser(int id);
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(int id);
-        Task<User> UpdateUser(int id, User user);
+        Task UpdateUser(int id, User user);
     }
 }

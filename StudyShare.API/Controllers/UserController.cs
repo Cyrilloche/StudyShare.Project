@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using StudyShare.Application.Dtos;
+using StudyShare.Domain.Dtos;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Entities;
 using System.Collections.Generic;
@@ -19,9 +19,19 @@ namespace StudyShare.API.Controllers
         }
 
         [HttpGet]
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<ActionResult<List<UserDto>>> GetAllUsers()
         {
-            return await _userService.GetAllUsers();
+            List<UserDto> users = await _userService.GetAllUsers();
+            return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetUserById(int id)
+        {
+            UserDto user = await _userService.GetUserById(id);
+            return Ok(user);
+        }
+
+        
     }
 }

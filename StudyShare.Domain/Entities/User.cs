@@ -7,10 +7,13 @@ namespace StudyShare.Domain.Entities
     {
 
         public int UserId { get; set; }
-        public string UserLastname { get; set; }
-        public string UserFirstname { get; set; }
-        public string UserEmail { get; set; }
-        public string UserPassword { get; set; }
+        public string UserLastname { get; set; } = string.Empty;
+        public string UserFirstname { get; set; } = string.Empty;
+        public string UserEmail { get; set; } = string.Empty;
+        public string UserPassword { get; set; } = string.Empty;
+        public int UserRoleId { get; set; }
+        
+        
 
         public virtual ICollection<UserSchool> UserSchool { get; set; }
         public virtual ICollection<UserWorkGroup> UserWorkGroup { get; set; }

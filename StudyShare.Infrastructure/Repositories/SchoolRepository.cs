@@ -12,6 +12,10 @@ namespace StudyShare.Infrastructure.Repositories
     public class SchoolRepository : ISchoolRepository
     {
         private readonly StudyShareDbContext _context;
+        public SchoolRepository(StudyShareDbContext context)
+        {
+            _context = context;
+        }
         public async Task<School> CreateSchool(School school)
         {
             await _context.Schools.AddAsync(school);
@@ -45,14 +49,14 @@ namespace StudyShare.Infrastructure.Repositories
             return schools.FindAll(s => s.SchoolName == schoolName);
         }
 
-        public async Task<School> UpdateSchool(int id, School updateSchool)
+        public async Task UpdateSchool(int id, School updateSchool)
         {
             School school = await GetSchoolById(id);
             if (school != null)
             {
                 school.SchoolName = updateSchool.SchoolName;
+                await _context.SaveChangesAsync();
             }
-            return school;
         }
     }
 }

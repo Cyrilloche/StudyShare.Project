@@ -17,13 +17,7 @@ namespace StudyShare.Domain.Repositories
         {
             _context = context;
         }
-
-        private static List<User> _users = new()
-        {
-            new User { UserId = 1, UserFirstname = "Alex", UserLastname = "Dach" },
-            new User { UserId = 2, UserFirstname = "Matthias", UserLastname = "Dumas" },
-            new User { UserId = 3, UserFirstname = "Arnaud", UserLastname = "Muller" },
-        };
+        
         public async Task<User> CreateUser(User user)
         {
             await _context.Users.AddAsync(user);
@@ -43,13 +37,7 @@ namespace StudyShare.Domain.Repositories
 
         public async Task<List<User>> GetAllUsers()
         {
-            if (_context == null)
-                System.Console.WriteLine("NULL");
-            System.Console.WriteLine("test");
-            List<User> users = await _context.Users.ToListAsync();
-            System.Console.WriteLine($"Number of users: {users.Count}");
-            return users;
-            //return _users.ToList();
+            return await _context.Users.ToListAsync();
         }
 
 
@@ -58,7 +46,7 @@ namespace StudyShare.Domain.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
 
-        public async Task<User> UpdateUser(int id, User updateUser)
+        public async Task UpdateUser(int id, User updateUser)
         {
             User user = await GetUserById(id);
 
@@ -68,13 +56,9 @@ namespace StudyShare.Domain.Repositories
                 user.UserLastname = updateUser.UserLastname;
                 user.UserEmail = updateUser.UserEmail;
                 user.UserPassword = updateUser.UserPassword;
-
+                
                 await _context.SaveChangesAsync();
-                return user;
-
             }
-            return null;
-
         }
     }
 }

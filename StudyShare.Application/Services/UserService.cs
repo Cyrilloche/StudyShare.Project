@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using StudyShare.Application.Dtos;
+using StudyShare.Domain.Dtos;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Entities;
 using StudyShare.Domain.Interfaces;
+using StudyShare.Application.Utilities;
 
 namespace StudyShare.Application.Services
 {
@@ -29,34 +30,29 @@ namespace StudyShare.Application.Services
 
         public async Task<List<UserDto>> GetAllUsers()
         {
-            List<User> users = await _userRepository.GetAllUsers();
+           List<User> users = await _userRepository.GetAllUsers();
 
-            List<UserDto> userDtos = new List<UserDto>();
+           List<UserDto> usersDto = new List<UserDto>();
 
-            foreach (User user in users)
-            {
-                UserDto userDto = new UserDto(
-                    user.UserId,
-                    user.UserLastname,
-                    user.UserFirstname,
-                    user.UserEmail,
-                    user.UserPassword
-                );
-                userDtos.Add(userDto);
+           foreach (User user in users)
+           {
+                usersDto.Add(ObjectUtilities.ConvertToDTO<User, UserDto>(user));
+           }
 
-            }
-
-            return userDtos;
+            return usersDto;
         }
 
-        public Task<User> GetUserById(int id)
+        public async Task<UserDto> GetUserById(int id)
+        {
+            User user = await _userRepository.GetUserById(id);
+            
+            return ObjectUtilities.ConvertToDTO<User, UserDto>(user);
+        }
+
+        public Task UpdateUser(int id, User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> UpdateUser(int id, User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

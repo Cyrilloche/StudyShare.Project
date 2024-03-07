@@ -13,6 +13,6 @@ namespace StudyShare.Infrastructure.Interfaces
         Task<List<Paper>> GetAllPapers();
         Task<List<Paper>> GetPaperByAuthor(int userId);
         Task<Paper> GetPaperById(int id);
-        Task<Paper> UpdatePaper(int id, Paper paper);
+        Task UpdatePaper(int id, Paper paper);
     }
 }

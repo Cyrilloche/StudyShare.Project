@@ -13,6 +13,10 @@ namespace StudyShare.Infrastructure.Repositories
     {
 
         private readonly StudyShareDbContext _context;
+        public PaperRepository(StudyShareDbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<Paper> CreatePaper(Paper paper)
         {
@@ -47,7 +51,7 @@ namespace StudyShare.Infrastructure.Repositories
             return await _context.Papers.FirstOrDefaultAsync(p => p.PaperId == id);
         }
 
-        public async Task<Paper> UpdatePaper(int id, Paper updatePaper)
+        public async Task UpdatePaper(int id, Paper updatePaper)
         {
             Paper paper = await GetPaperById(id);
             if (paper != null)
@@ -59,10 +63,10 @@ namespace StudyShare.Infrastructure.Repositories
                 paper.PaperVisibility = updatePaper.PaperVisibility;
 
                 await _context.SaveChangesAsync();
-                return paper;
+
             }
 
-            return null;
+
 
         }
     }

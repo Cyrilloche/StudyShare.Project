@@ -13,6 +13,6 @@ namespace StudyShare.Infrastructure.Interfaces
         Task<List<School>> GetSchoolByName(string schoolName);
         Task<School> CreateSchool(School school);
         Task DeleteSchool(int id);
-        Task<School> UpdateSchool(int id, School school);
+        Task UpdateSchool(int id, School school);
     }
 }

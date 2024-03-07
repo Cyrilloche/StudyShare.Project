@@ -12,6 +12,10 @@ namespace StudyShare.Infrastructure.Repositories
     public class KeywordRepository : IKeywordRepository
     {
         private readonly StudyShareDbContext _context;
+        public KeywordRepository(StudyShareDbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<Keyword> AddKeyword(Keyword keyword)
         {
