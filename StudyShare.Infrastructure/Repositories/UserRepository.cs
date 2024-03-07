@@ -13,6 +13,17 @@ namespace StudyShare.Domain.Repositories
     {
         private readonly StudyShareDbContext _context;
 
+        public UserRepository(StudyShareDbContext context)
+        {
+            _context = context;
+        }
+
+        private static List<User> _users = new()
+        {
+            new User { UserId = 1, UserFirstname = "Alex", UserLastname = "Dach" },
+            new User { UserId = 2, UserFirstname = "Matthias", UserLastname = "Dumas" },
+            new User { UserId = 3, UserFirstname = "Arnaud", UserLastname = "Muller" },
+        };
         public async Task<User> CreateUser(User user)
         {
             await _context.Users.AddAsync(user);
@@ -32,8 +43,15 @@ namespace StudyShare.Domain.Repositories
 
         public async Task<List<User>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            if (_context == null)
+                System.Console.WriteLine("NULL");
+            System.Console.WriteLine("test");
+            List<User> users = await _context.Users.ToListAsync();
+            System.Console.WriteLine($"Number of users: {users.Count}");
+            return users;
+            //return _users.ToList();
         }
+
 
         public async Task<User> GetUserById(int id)
         {
