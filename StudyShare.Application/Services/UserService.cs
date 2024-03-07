@@ -18,14 +18,16 @@ namespace StudyShare.Application.Services
             _userRepository = userRepository;
         }
 
-        public Task<User> CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            throw new NotImplementedException();
+            await _userRepository.CreateUser(user);
+            return user;
         }
 
-        public Task DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            await _userRepository.DeleteUser(id);
+            
         }
 
         public async Task<List<UserDto>> GetAllUsers()
@@ -49,9 +51,11 @@ namespace StudyShare.Application.Services
             return ObjectUtilities.ConvertToDTO<User, UserDto>(user);
         }
 
-        public Task UpdateUser(int id, User user)
+        public async Task UpdateUser(int id, UpdateUserDto userDto)
         {
-            throw new NotImplementedException();
+            User user = await _userRepository.GetUserById(id);
+
+            ObjectUtilities.ObjectUpdater<User, UpdateUserDto> (user, userDto);
         }
 
     }
