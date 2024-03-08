@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudyShare.Infrastructure.Database;
 
@@ -11,9 +12,11 @@ using StudyShare.Infrastructure.Database;
 namespace StudyShare.Infrastructure.Migrations
 {
     [DbContext(typeof(StudyShareDbContext))]
-    partial class StudyShareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240308090405_SchoolClassLevel")]
+    partial class SchoolClassLevel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

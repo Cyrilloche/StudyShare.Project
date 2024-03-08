@@ -32,7 +32,7 @@ namespace StudyShare.Application.Utilities
             }
         }
 
-        public static TDto ConvertToDTO<T, TDto>(T obj) where TDto : new()
+        public static TDto ObjectMapper<T, TDto>(T obj) where TDto : new()
         {
             TDto dto = new TDto();
             PropertyInfo[] objProperties = typeof(T).GetProperties();

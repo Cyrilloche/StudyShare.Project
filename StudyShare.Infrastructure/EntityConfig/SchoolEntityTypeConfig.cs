@@ -10,6 +10,7 @@ namespace StudyShare.Infrastructure.EntityConfig
         {
             builder.HasKey(s => s.SchoolId);
             builder.Property(r => r.SchoolName).IsRequired();
+            
         }
     }
 }
