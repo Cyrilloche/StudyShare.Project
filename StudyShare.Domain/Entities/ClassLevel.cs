@@ -8,10 +8,5 @@ namespace StudyShare.Domain.Entities
         public virtual ICollection<UserClassLevel> UserClassLevel { get; set; }
         public virtual ICollection<PaperClassLevel> PaperClassLevel { get; set; }
 
-
-
-
-
-
     }
 }

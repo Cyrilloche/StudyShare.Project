@@ -4,12 +4,17 @@ using StudyShare.Application.Services;
 using StudyShare.Domain.Interfaces;
 using StudyShare.Domain.Repositories;
 using StudyShare.Infrastructure.Database;
+using StudyShare.Infrastructure.Interfaces;
+using StudyShare.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
+builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
 
 
 // Add services to the container.

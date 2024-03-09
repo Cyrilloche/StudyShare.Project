@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using StudyShare.Application.Interfaces;
-using StudyShare.Domain.Entities;
-using StudyShare.Domain.Interfaces;
 
 namespace StudyShare.Tests.Controllers
 {
