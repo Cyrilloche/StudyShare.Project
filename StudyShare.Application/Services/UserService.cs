@@ -2,7 +2,7 @@ using StudyShare.Domain.Dtos;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Entities;
 using StudyShare.Domain.Interfaces;
-using StudyShare.Application.Utilities;
+using StudyShare.Domain.Utilities;
 
 namespace StudyShare.Application.Services
 {

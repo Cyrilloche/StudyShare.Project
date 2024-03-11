@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using StudyShare.Application.Interfaces;
-using StudyShare.Application.Utilities;
+using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Interfaces;
@@ -57,14 +53,15 @@ namespace StudyShare.Application.Services
         public async Task<PaperDto> GetPaperById(int id)
         {
             Paper paper = await _paperRepository.GetPaperById(id);
-             return ObjectUtilities.MapObject<PaperDto>(paper);
+            return ObjectUtilities.MapObject<PaperDto>(paper);
         }
 
         public async Task UpdatePaper(int id, UpdatePaperDto paperDto)
         {
-            //Paper paper = ObjectUtilities.ObjectMapper<Paper, PaperDto>(paperDto);
-
-            //await _paperRepository.UpdatePaper(id, paper);
+            Paper paper = await _paperRepository.GetPaperById(id);
+            ObjectUtilities.UpdateObject<Paper, UpdatePaperDto>(paper, paperDto);
+            
+            await _paperRepository.UpdatePaper(paper);
         }
     }
 }

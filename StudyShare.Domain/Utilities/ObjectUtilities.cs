@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace StudyShare.Application.Utilities
+namespace StudyShare.Domain.Utilities
 {
     public class ObjectUtilities
     {

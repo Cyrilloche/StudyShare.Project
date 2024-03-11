@@ -1,5 +1,5 @@
 using StudyShare.Application.Interfaces;
-using StudyShare.Application.Utilities;
+using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Interfaces;

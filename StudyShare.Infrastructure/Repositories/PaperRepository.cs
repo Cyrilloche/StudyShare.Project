@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Database;
 using StudyShare.Infrastructure.Interfaces;
@@ -50,17 +51,27 @@ namespace StudyShare.Infrastructure.Repositories
             return await _context.Papers.FirstOrDefaultAsync(p => p.PaperId == id);
         }
 
-        public async Task UpdatePaper(int id, Paper updatePaper)
+        public async Task UpdatePaper(Paper updatePaper)
         {
-            Paper paper = await GetPaperById(id);
-            
-            if (paper != null)
-            {
-                paper.PaperDescription = updatePaper.PaperDescription;
-                paper.PaperVisibility = updatePaper.PaperVisibility;
 
-                await _context.SaveChangesAsync();
-            }
+            System.Console.WriteLine();
+
+            System.Console.WriteLine("des " + updatePaper.PaperDescription);
+            System.Console.WriteLine("id " + updatePaper.PaperId);
+            System.Console.WriteLine();
+
+
+
+            System.Console.WriteLine();
+
+            System.Console.WriteLine("des " + updatePaper.PaperDescription);
+            System.Console.WriteLine("id " + updatePaper.PaperId);
+            System.Console.WriteLine();
+            //paper.PaperId = id;
+
+            _context.Papers.Update(updatePaper);
+
+            await _context.SaveChangesAsync();
         }
     }
 }
