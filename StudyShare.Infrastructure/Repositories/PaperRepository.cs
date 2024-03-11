@@ -53,24 +53,7 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task UpdatePaper(Paper updatePaper)
         {
-
-            System.Console.WriteLine();
-
-            System.Console.WriteLine("des " + updatePaper.PaperDescription);
-            System.Console.WriteLine("id " + updatePaper.PaperId);
-            System.Console.WriteLine();
-
-
-
-            System.Console.WriteLine();
-
-            System.Console.WriteLine("des " + updatePaper.PaperDescription);
-            System.Console.WriteLine("id " + updatePaper.PaperId);
-            System.Console.WriteLine();
-            //paper.PaperId = id;
-
             _context.Papers.Update(updatePaper);
-
             await _context.SaveChangesAsync();
         }
     }

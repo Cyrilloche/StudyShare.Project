@@ -42,19 +42,10 @@ namespace StudyShare.Domain.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
 
-        public async Task UpdateUser(int id, User updateUser)
-        {
-            User user = await GetUserById(id);
-
-            if (user != null)
-            {
-                user.UserFirstname = updateUser.UserFirstname;
-                user.UserLastname = updateUser.UserLastname;
-                user.UserEmail = updateUser.UserEmail;
-                user.UserPassword = updateUser.UserPassword;
-                
-                await _context.SaveChangesAsync();
-            }
+        public async Task UpdateUser(User updateUser)
+        {  
+            _context.Users.Update(updateUser);
+            await _context.SaveChangesAsync();
         }
     }
 }

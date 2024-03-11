@@ -50,7 +50,9 @@ namespace StudyShare.Application.Services
         {
             User user = await _userRepository.GetUserById(id);
 
-            //ObjectUtilities.ObjectUpdater<User, UpdateUserDto> (user, userDto);
+            ObjectUtilities.UpdateObject<User, UpdateUserDto>(user, userDto);
+
+            await _userRepository.UpdateUser(user);
 
         }
 
