@@ -14,9 +14,9 @@ namespace StudyShare.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<User> CreateUser(UserDto user)
+        public async Task<User> CreateUser(UserDto userDto)
         {
-            return ObjectUtilities.ObjectMapper<UserDto, User>(user);
+            return await _userRepository.CreateUser(ObjectUtilities.MapObject<User>(userDto));
         }
 
         public async Task DeleteUser(int id)
@@ -33,7 +33,7 @@ namespace StudyShare.Application.Services
 
            foreach (User user in users)
            {
-                usersDto.Add(ObjectUtilities.ObjectMapper<User, UserDto>(user));
+                usersDto.Add(ObjectUtilities.MapObject<UserDto>(user));
            }
 
             return usersDto;
@@ -43,14 +43,15 @@ namespace StudyShare.Application.Services
         {
             User user = await _userRepository.GetUserById(id);
             
-            return ObjectUtilities.ObjectMapper<User, UserDto>(user);
+            return ObjectUtilities.MapObject<UserDto>(user);
         }
 
         public async Task UpdateUser(int id, UpdateUserDto userDto)
         {
             User user = await _userRepository.GetUserById(id);
 
-            ObjectUtilities.ObjectUpdater<User, UpdateUserDto> (user, userDto);
+            //ObjectUtilities.ObjectUpdater<User, UpdateUserDto> (user, userDto);
+
         }
 
     }

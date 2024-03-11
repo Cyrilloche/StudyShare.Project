@@ -16,6 +16,9 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task<Paper> CreatePaper(Paper paper)
         {
+            paper.PaperUploadDate = DateTime.Now;
+            paper.PaperName = paper.PaperUploadDate.ToString("yyyyMMdd") + "_" + paper.PaperName;
+
             await _context.Papers.AddAsync(paper);
             await _context.SaveChangesAsync();
             return paper;
@@ -50,20 +53,14 @@ namespace StudyShare.Infrastructure.Repositories
         public async Task UpdatePaper(int id, Paper updatePaper)
         {
             Paper paper = await GetPaperById(id);
+            
             if (paper != null)
             {
-                paper.PaperName = paper.PaperName;
                 paper.PaperDescription = updatePaper.PaperDescription;
-                paper.PaperKeyword = updatePaper.PaperKeyword;
-                paper.PaperClassLevel = updatePaper.PaperClassLevel;
                 paper.PaperVisibility = updatePaper.PaperVisibility;
 
                 await _context.SaveChangesAsync();
-
             }
-
-
-
         }
     }
 }

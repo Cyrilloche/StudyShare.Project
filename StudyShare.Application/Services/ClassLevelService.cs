@@ -20,7 +20,7 @@ namespace StudyShare.Application.Services
 
             foreach(ClassLevel classLevel in classLevels)
             {
-                classLevelDto.Add(ObjectUtilities.ObjectMapper<ClassLevel, ClassLevelDto>(classLevel));
+                classLevelDto.Add(ObjectUtilities.MapObject<ClassLevelDto>(classLevel));
             }
 
             return classLevelDto;
@@ -30,7 +30,7 @@ namespace StudyShare.Application.Services
         {
             ClassLevel classLevel = await _classLevelRepository.GetClassLevelById(classLevelId);
 
-            return ObjectUtilities.ObjectMapper<ClassLevel, ClassLevelDto>(classLevel);
+            return ObjectUtilities.MapObject<ClassLevelDto>(classLevel);
         }
     }
 }

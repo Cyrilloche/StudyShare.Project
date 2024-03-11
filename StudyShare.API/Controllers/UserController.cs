@@ -39,7 +39,7 @@ namespace StudyShare.API.Controllers
         {
             if (user != null)
             {
-                return Ok(user);
+                return Ok(await _userService.CreateUser(user));
             }
             return BadRequest();
         }

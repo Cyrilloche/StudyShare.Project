@@ -9,7 +9,5 @@ namespace StudyShare.Domain.Entities
         public int ClassLevelId { get; set; }
 
         public ClassLevel ClassLevel { get; set; }
-
-
     }
 }
