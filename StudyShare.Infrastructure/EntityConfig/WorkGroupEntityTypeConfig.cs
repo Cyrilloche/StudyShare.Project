@@ -10,7 +10,7 @@ namespace StudyShare.Infrastructure.EntityConfig
         public void Configure(EntityTypeBuilder<WorkGroup> builder)
         {
             builder.HasKey(g => g.WorkGroupId);
-            builder.Property(g => g.WorkGroupName).IsRequired();
+            builder.Property(g => g.WorkGroupName).IsRequired().HasMaxLength(50);
         }
     }
 

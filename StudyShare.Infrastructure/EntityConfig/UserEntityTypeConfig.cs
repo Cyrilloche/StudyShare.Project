@@ -11,10 +11,10 @@ namespace StudyShare.Infrastructure.EntityConfig
         {
             // Configure property 
             builder.HasKey(u => u.UserId);
-            builder.Property(u => u.UserLastname).IsRequired();
-            builder.Property(u => u.UserFirstname).IsRequired();
-            builder.Property(u => u.UserEmail).IsRequired();
-            builder.Property(u => u.UserPassword).IsRequired();
+            builder.Property(u => u.UserLastname).IsRequired().HasMaxLength(30);
+            builder.Property(u => u.UserFirstname).IsRequired().HasMaxLength(30);
+            builder.Property(u => u.UserEmail).IsRequired().HasMaxLength(100);
+            builder.Property(u => u.UserPassword).IsRequired().HasMaxLength(255);
 
             builder.HasData(
                 new User { UserId = 1, UserLastname = "CHERRIER", UserFirstname = "Cyril", UserEmail = "cyril@gmail.com", UserPassword = "motdepasse" },

@@ -47,7 +47,7 @@ namespace StudyShare.Tests.Services
         [TestMethod]
         public void UseInvalidId_ShouldThrowException()
         {
-            
+               
         }
 
         // Méthode de tests pour la méthode CreateUser

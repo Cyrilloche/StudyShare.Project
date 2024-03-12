@@ -9,7 +9,7 @@ namespace StudyShare.Infrastructure.EntityConfig
         public void Configure(EntityTypeBuilder<School> builder)
         {
             builder.HasKey(s => s.SchoolId);
-            builder.Property(r => r.SchoolName).IsRequired();
+            builder.Property(r => r.SchoolName).IsRequired().HasMaxLength(50);
             
         }
     }
