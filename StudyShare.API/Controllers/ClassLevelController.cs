@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using StudyShare.API.Utilities;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Dtos;
 
@@ -26,7 +25,6 @@ namespace StudyShare.API.Controllers
         [HttpGet("{id}")]
         public async Task<ClassLevelDto> GetClassLevelById(int id)
         {
-            ControllerUtilities.InvalidIdVerification(id);
             return await _classLevelService.GetClassLevelById(id);
         }
     }

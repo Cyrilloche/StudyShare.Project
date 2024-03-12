@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using StudyShare.API.Utilities;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Dtos;
 
@@ -28,8 +23,6 @@ namespace StudyShare.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PaperDto>> GetPaperById(int id)
         {
-            ControllerUtilities.InvalidIdVerification(id);
-
             PaperDto paperDto = await _paperSerice.GetPaperById(id);
             if (paperDto != null)
                 return paperDto;
@@ -39,8 +32,6 @@ namespace StudyShare.API.Controllers
         [HttpGet("authorId")]
         public async Task<ActionResult<List<PaperDto>>> GetPapersByAuthor(int authorId)
         {
-            ControllerUtilities.InvalidIdVerification(authorId);
-
             return await _paperSerice.GetPaperByAuthor(authorId);
         }
 
@@ -56,16 +47,12 @@ namespace StudyShare.API.Controllers
         [HttpPut]
         public async Task UpdatePaper(int paperId, UpdatePaperDto paperDto)
         {
-            ControllerUtilities.InvalidIdVerification(paperId);
-
             await _paperSerice.UpdatePaper(paperId, paperDto);
         }
 
         [HttpDelete]
         public async Task DeletePaper(int paperId)
         {
-            ControllerUtilities.InvalidIdVerification(paperId);
-
             await _paperSerice.DeletePaper(paperId);
         }
 

@@ -3,6 +3,7 @@ using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Entities;
 using StudyShare.Domain.Interfaces;
 using StudyShare.Domain.Utilities;
+using StudyShare.Application.Exceptions;
 
 namespace StudyShare.Application.Services
 {
@@ -16,6 +17,13 @@ namespace StudyShare.Application.Services
 
         public async Task<User> CreateUser(UserDto userDto)
         {
+           if (userDto.UserPassword.Length < 8 
+           ||!userDto.UserPassword.Any(char.IsDigit) 
+           ||!userDto.UserPassword.Any(char.IsUpper) 
+           ||!userDto.UserPassword.Any(char.IsLower))
+            {
+                throw new PasswordFormatException("Password does not meet format requirements");
+            }
             return await _userRepository.CreateUser(ObjectUtilities.MapObject<User>(userDto));
         }
 
@@ -41,6 +49,7 @@ namespace StudyShare.Application.Services
 
         public async Task<UserDto> GetUserById(int id)
         {
+            Utilities.ServiceUtilities.InvalidIdVerification(id);
             User user = await _userRepository.GetUserById(id);
             
             return ObjectUtilities.MapObject<UserDto>(user);

@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Database;
 using StudyShare.Infrastructure.Interfaces;

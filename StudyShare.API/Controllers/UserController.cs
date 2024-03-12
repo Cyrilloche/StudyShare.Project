@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using StudyShare.Domain.Dtos;
 using StudyShare.Application.Interfaces;
-using StudyShare.API.Utilities;
 
 namespace StudyShare.API.Controllers
 {
@@ -26,8 +25,6 @@ namespace StudyShare.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
-            ControllerUtilities.InvalidIdVerification(id);
-
             UserDto user = await _userService.GetUserById(id);
             if (user == null)
                 throw new Exception();
@@ -47,15 +44,12 @@ namespace StudyShare.API.Controllers
         [HttpDelete]
         public async Task DeleteUser(int id)
         {
-            ControllerUtilities.InvalidIdVerification(id);
             await _userService.DeleteUser(id);
         }
 
         [HttpPut]
         public async Task UpdateUser(int id, UpdateUserDto userDto)
         {
-            ControllerUtilities.InvalidIdVerification(id);
-            
             await _userService.UpdateUser(id, userDto);
         }
 
