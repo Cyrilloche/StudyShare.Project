@@ -26,5 +26,11 @@ namespace StudyShare.Application.Utilities
             return Regex.IsMatch(email, pattern);
 
         }
+
+        public static bool IsValidName(string name)
+        {
+            string pattern = @"^[a-zA-Z]{3,30}";
+            return Regex.IsMatch(name, pattern);
+        }
     }
 }

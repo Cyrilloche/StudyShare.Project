@@ -20,14 +20,16 @@ namespace StudyShare.Application.Services
         {
             
             if (!ServiceUtilities.IsValidPassword(userDto.UserPassword))
-            {
-                throw new PasswordFormatException("Password does not meet format requirements");
-            }
+                throw new BadRequestException("Password does not meet format requirements");
 
             if (!ServiceUtilities.IsValidEmail(userDto.UserEmail))
-            {
-                throw new EmailFormatException("Email format is not valid");
-            }
+                throw new BadRequestException("Invalid user email format");
+
+            if (!ServiceUtilities.IsValidName(userDto.UserLastname))
+                throw new BadRequestException("Invalid user lastname format");
+            
+            if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
+                throw new BadRequestException("Invalid user firstname format");
 
             return await _userRepository.CreateUser(ObjectUtilities.MapObject<User>(userDto));
         }

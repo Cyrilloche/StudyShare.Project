@@ -56,65 +56,72 @@ namespace StudyShare.Tests.Services
         public async Task CreateUser_WithInvalidPasswordFormat_ShouldThrowPasswordFormatException()
         {
             // Arrange 
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "weak", UserEmail = "valid@mail.com" };
+            UserDto user = new UserDto {UserPassword = "weak"};
             _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
 
             // Act
-            var exception = await Assert.ThrowsExceptionAsync<PasswordFormatException>(async () => await _serviceMock.CreateUser(user));
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.CreateUser(user));
 
             // Assert
             Assert.AreEqual("Password does not meet format requirements", exception.Message);
         }
 
-        [TestMethod]
-        public async Task CreateUser_WithValidPasswordFormat_ShouldNotThrowException()
-        {
-            // Arrange 
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@mail.com" };
-            _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
-
-            // Act
-            async Task CreateUserAction() => await _serviceMock.CreateUser(user);
-
-            // Assert
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await CreateUserAction();
-                }
-                catch (Exception ex)
-                {
-                    Assert.Fail($"Expected no exception, but an exception was thrown: {ex}");
-                }
-            });
-        }
 
         [TestMethod]
         public async Task CreateUser_WithInvalidEmailFormat_ShouldThrowEmailFormatException()
         {
             // Arrange
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "invalid.mail" };
+            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "invalidEmail.fr" };
             _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
 
             // Act
-            var exception = await Assert.ThrowsExceptionAsync<EmailFormatException>(async () =>await _serviceMock.CreateUser(user));
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
 
             // Assert
-            Assert.AreEqual("Email format is not valid", exception.Message);
+            Assert.AreEqual("Invalid user email format", exception.Message);
         }
 
         [TestMethod]
-        public async Task CreateUser_WithValidEmailFormat_ShouldNotThrowException()
+        public async Task CreateUser_WithInvalidLastnameFormat_ShouldThrowException()
         {
-             // Arrange
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@mail.com" };
-            _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
+            // Arrange 
+            UserDto user = new UserDto {UserId = 1, UserLastname = "a", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
+            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
 
-            // Act
+           // Act
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
+
+            // Assert
+            Assert.AreEqual("Invalid user lastname format", exception.Message);
+
+        }
+
+        [TestMethod]
+        public async Task CreateUser_WithInvalidFirstnameFormat_ShouldThrowException()
+        {
+            // Arrange 
+            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
+            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
+
+           // Act
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
+
+            // Assert
+            Assert.AreEqual("Invalid user firstname format", exception.Message);
+
+        }
+
+        [TestMethod]
+        public async Task CreateUser_WithValidFormat_ShouldNotThrowException()
+        {
+            // Arrange 
+            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
+            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
+
+           // Act
             async Task CreateUserAction() => await _serviceMock.CreateUser(user);
 
-             // Assert
+            // Assert
             await Task.Run(async () =>
             {
                 try
@@ -127,6 +134,7 @@ namespace StudyShare.Tests.Services
                 }
             });
         }
+
 
 
 
