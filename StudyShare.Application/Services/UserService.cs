@@ -19,23 +19,22 @@ namespace StudyShare.Application.Services
         public async Task<User> CreateUser(UserDto userDto)
         {
             
-            if (!ServiceUtilities.IsValidPassword(userDto.UserPassword))
-                throw new BadRequestException("Password does not meet format requirements");
-
-            if (!ServiceUtilities.IsValidEmail(userDto.UserEmail))
-                throw new BadRequestException("Invalid user email format");
-
             if (!ServiceUtilities.IsValidName(userDto.UserLastname))
                 throw new BadRequestException("Invalid user lastname format");
-            
             if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
                 throw new BadRequestException("Invalid user firstname format");
+            if (!ServiceUtilities.IsValidEmail(userDto.UserEmail))
+                throw new BadRequestException("Invalid user email format");
+            if (!ServiceUtilities.IsValidPassword(userDto.UserPassword))
+                throw new BadRequestException("Invalid user password format");
 
             return await _userRepository.CreateUser(ObjectUtilities.MapObject<User>(userDto));
         }
 
         public async Task DeleteUser(int id)
         {
+            if(!ServiceUtilities.IsValidId(id))
+                throw new BadRequestException("Invalid id");
             await _userRepository.DeleteUser(id);
             
         }
@@ -56,14 +55,33 @@ namespace StudyShare.Application.Services
 
         public async Task<UserDto> GetUserById(int id)
         {
-            Utilities.ServiceUtilities.IsValidId(id);
-            User user = await _userRepository.GetUserById(id);
-            
-            return ObjectUtilities.MapObject<UserDto>(user);
+            if (!ServiceUtilities.IsValidId(id))
+                throw new BadRequestException("Invalid id");
+
+            return ObjectUtilities.MapObject<UserDto>(await _userRepository.GetUserById(id));
         }
 
         public async Task UpdateUser(int id, UpdateUserDto userDto)
         {
+            if (!ServiceUtilities.IsValidId(id))
+                throw new BadRequestException("Invalid id");
+
+            if(userDto.UserFirstname != null)
+                if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
+                    throw new BadRequestException("Invalid user firstname format");
+
+            if(userDto.UserLastname != null)
+                if (!ServiceUtilities.IsValidName(userDto.UserLastname))
+                    throw new BadRequestException("Invalid user lastname format");
+
+            if(userDto.UserEmail != null)
+                if (!ServiceUtilities.IsValidName(userDto.UserEmail))
+                    throw new BadRequestException("Invalid user email format");
+
+            if(userDto.UserPassword != null)
+                if (!ServiceUtilities.IsValidName(userDto.UserPassword))
+                    throw new BadRequestException("Invalid user password format");
+
             User user = await _userRepository.GetUserById(id);
 
             ObjectUtilities.UpdateObject<User, UpdateUserDto>(user, userDto);

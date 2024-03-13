@@ -4,12 +4,9 @@ namespace StudyShare.Application.Utilities
 {
     public class ServiceUtilities
     {
-        public static void IsValidId(int id)
+        public static bool IsValidId(int id)
         {
-            if (id <= 0)
-            {
-                throw new ArgumentOutOfRangeException("Invalid ID exception");
-            }
+            return id > 0;
         }
 
         public static bool IsValidPassword(string password)

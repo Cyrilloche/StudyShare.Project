@@ -45,30 +45,51 @@ namespace StudyShare.Tests.Services
     
         // Méthode de test pour la méthode GetUserById
         [TestMethod]
-        public void UseInvalidId_ShouldThrowException()
+        public async Task GetUser_WithInvalidId_ShouldThrowException()
         {
-               
+            // Arrange
+            int id = -1;
+            _repositoryMock.Setup(repo => repo.GetUserById(id));
+
+            // Act
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.GetUserById(id));
+
+            //Assert
+            Assert.AreEqual("Invalid id", exception.Message);
         }
 
-        // Méthode de tests pour la méthode CreateUser
-
+        // Méthode de test pour la méthode DeleteUser
         [TestMethod]
-        public async Task CreateUser_WithInvalidPasswordFormat_ShouldThrowPasswordFormatException()
+        public async Task DeleteUser_WithInvalidId_ShouldThrowException()
+        {
+            // Arrange
+            int id = -1;
+            _repositoryMock.Setup(repo => repo.DeleteUser(id));
+
+            // Act
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.DeleteUser(id));
+
+            //Assert
+            Assert.AreEqual("Invalid id", exception.Message);
+        }
+
+        // Méthodes de tests pour la méthode CreateUser
+        [TestMethod]
+        public async Task CreateUser_WithInvalidPasswordFormat_ShouldThrowException()
         {
             // Arrange 
-            UserDto user = new UserDto {UserPassword = "weak"};
+             UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "weak", UserEmail = "valid@email.fr" };
             _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
 
             // Act
             var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.CreateUser(user));
 
             // Assert
-            Assert.AreEqual("Password does not meet format requirements", exception.Message);
+            Assert.AreEqual("Invalid user password format", exception.Message);
         }
 
-
         [TestMethod]
-        public async Task CreateUser_WithInvalidEmailFormat_ShouldThrowEmailFormatException()
+        public async Task CreateUser_WithInvalidEmailFormat_ShouldThrowtException()
         {
             // Arrange
             UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "invalidEmail.fr" };
@@ -93,7 +114,6 @@ namespace StudyShare.Tests.Services
 
             // Assert
             Assert.AreEqual("Invalid user lastname format", exception.Message);
-
         }
 
         [TestMethod]
@@ -108,7 +128,6 @@ namespace StudyShare.Tests.Services
 
             // Assert
             Assert.AreEqual("Invalid user firstname format", exception.Message);
-
         }
 
         [TestMethod]
@@ -134,10 +153,6 @@ namespace StudyShare.Tests.Services
                 }
             });
         }
-
-
-
-
     }
  }
 
