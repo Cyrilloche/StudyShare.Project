@@ -17,8 +17,9 @@ namespace StudyShare.Tests.Services
         // Déclaration d'une variable pour le service UserService à tester
         private UserService _serviceMock;
 
+        [TestInitialize]
         // Constructeur de la classe de tests
-        public UserServiceTests()
+        public void Init()
         {
             // Initialisation du mock du UserRepository
             _repositoryMock = new Mock<IUserRepository>();
@@ -30,19 +31,35 @@ namespace StudyShare.Tests.Services
 
         // Méthode de test pour la méthode GetAllUsers de UserService
         [TestMethod]
-        public void GetAllUsers_ReturnsOk()
+        public void GetAllUsers_WithUsers_ShouldReturnUsers()
         {
             // Configuration du comportement du mock du UserRepository pour la méthode GetAllUsers
             // Retourner une liste d'utilisateurs lorsqu'elle est appelée
-            _repositoryMock.Setup(repo => repo.GetAllUsers()).ReturnsAsync(new List<User>());
+            _repositoryMock.Setup(repo => repo.GetAllUsers()).ReturnsAsync(new List<User> {
+                new User(),
+                new User()
+            });
             
             // Appel de la méthode GetAllUsers du service UserService à tester
             var result = _serviceMock.GetAllUsers();
 
             // Vérification que le résultat n'est pas nul
-            Assert.IsNotNull(result.Result);
+            // Assert.IsNotNull(result.Result);
+            Assert.AreEqual(2, result.Result.Count());
         }
-    
+
+        // TO DO FAIRE UNE MEETHODE OU IL N'Y A PAS DE USER
+        [TestMethod]
+        public void GetAllUsers_WithNoUsers_ShouldReturnEmptyList()
+        {
+            _repositoryMock.Setup(repo => repo.GetAllUsers()).ReturnsAsync(new List<User>());
+
+            var result = _serviceMock.GetAllUsers();
+
+            Assert.AreEqual(0, result.Result.Count());
+        }
+
+
         // Méthode de test pour la méthode GetUserById
         [TestMethod]
         public async Task GetUser_WithInvalidId_ShouldThrowException()
@@ -74,61 +91,31 @@ namespace StudyShare.Tests.Services
         }
 
         // Méthodes de tests pour la méthode CreateUser
-        [TestMethod]
-        public async Task CreateUser_WithInvalidPasswordFormat_ShouldThrowException()
+        [TestMethod] 
+        [DataRow("lastname", "a")]
+        [DataRow("firstname", "a")]
+        [DataRow("email", "wrongEmail")]
+        [DataRow("password", "weak")]
+        public async Task CreateUser_WithInvalidInput_ShouldThrowException(string field, string invalidValue)
         {
             // Arrange 
-             UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "weak", UserEmail = "valid@email.fr" };
+            UserDto user = new UserDto
+            {
+                UserId = 1,
+                UserLastname = field == "lastname" ? invalidValue : "valid",
+                UserFirstname = field == "firstname" ? invalidValue : "valid",
+                UserPassword = field == "password" ? invalidValue : "Strong1@",
+                UserEmail = field == "email" ? invalidValue : "valid@email.fr"
+            };
             _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
 
             // Act
             var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.CreateUser(user));
 
             // Assert
-            Assert.AreEqual("Invalid user password format", exception.Message);
+            Assert.AreEqual($"Invalid user {field} format", exception.Message);
         }
 
-        [TestMethod]
-        public async Task CreateUser_WithInvalidEmailFormat_ShouldThrowtException()
-        {
-            // Arrange
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "invalidEmail.fr" };
-            _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
-
-            // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
-
-            // Assert
-            Assert.AreEqual("Invalid user email format", exception.Message);
-        }
-
-        [TestMethod]
-        public async Task CreateUser_WithInvalidLastnameFormat_ShouldThrowException()
-        {
-            // Arrange 
-            UserDto user = new UserDto {UserId = 1, UserLastname = "a", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
-            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
-
-           // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
-
-            // Assert
-            Assert.AreEqual("Invalid user lastname format", exception.Message);
-        }
-
-        [TestMethod]
-        public async Task CreateUser_WithInvalidFirstnameFormat_ShouldThrowException()
-        {
-            // Arrange 
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
-            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
-
-           // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () =>await _serviceMock.CreateUser(user));
-
-            // Assert
-            Assert.AreEqual("Invalid user firstname format", exception.Message);
-        }
 
         [TestMethod]
         public async Task CreateUser_WithValidFormat_ShouldNotThrowException()
@@ -138,20 +125,8 @@ namespace StudyShare.Tests.Services
             _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
 
            // Act
-            async Task CreateUserAction() => await _serviceMock.CreateUser(user);
+           await _serviceMock.CreateUser(user);
 
-            // Assert
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await CreateUserAction();
-                }
-                catch (Exception ex)
-                {
-                    Assert.Fail($"Expected no exception, but an exception was thrown: {ex}");
-                }
-            });
         }
     }
  }
