@@ -6,6 +6,6 @@ namespace StudyShare.Infrastructure.Interfaces
     {
         Task<List<Keyword>> GetAllKeywords();
         Task<Keyword> AddKeyword(Keyword keyword);
-        Task DeleteKeyWord(int keywordId);
+        Task DeleteKeyword(int keywordId);
     }
 }

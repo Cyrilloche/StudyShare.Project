@@ -15,14 +15,14 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task<Keyword> AddKeyword(Keyword keyword)
         {
-            _context.Keywords.AddRangeAsync(keyword);
+            await _context.Keywords.AddRangeAsync(keyword);
             await _context.SaveChangesAsync();
 
             return keyword;
 
         }
 
-        public async Task DeleteKeyWord(int keywordId)
+        public async Task DeleteKeyword(int keywordId)
         {
             Keyword keyword = await _context.Keywords.FirstOrDefaultAsync(k => k.KeywordId == keywordId);
             if (keyword != null)
