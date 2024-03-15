@@ -15,7 +15,7 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task AddClassLevelToUserAsync(int userId, int classLevelId)
         {
-            var userClassLevel = new UserClassLevel
+            UserClassLevel userClassLevel = new UserClassLevel
             {
                 UserId = userId,
                 ClassLevelId = classLevelId

@@ -19,14 +19,14 @@ namespace StudyShare.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<KeywordDto>> GetAllKeywordAsync()
+        public async Task<ActionResult<KeywordDto>> GetAllKeyword()
         {
             List<KeywordDto> keywordsDto = await _keywordService.GetAllKeywords();
             return Ok(keywordsDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddKeywordAsync(KeywordDto keywordDto)
+        public async Task<ActionResult> AddKeyword(KeywordDto keywordDto)
         {
             if (keywordDto != null)
                 return Ok(await _keywordService.AddKeyword(keywordDto));
@@ -34,7 +34,7 @@ namespace StudyShare.API.Controllers
         }
 
         [HttpDelete]
-        public async Task DeleteKeywordAsync(int keywordId)
+        public async Task DeleteKeyword(int keywordId)
         {
             await _keywordService.DeleteKeyword(keywordId);
         }
