@@ -14,7 +14,8 @@ namespace StudyShare.Application.Utilities
 
             foreach (var item in list)
             {
-                dtos.Add(ObjectUtilities.MapObject<T1>(item));
+                if (item != null)
+                    dtos.Add(ObjectUtilities.MapObject<T1>(item));
             }
 
             return dtos;
