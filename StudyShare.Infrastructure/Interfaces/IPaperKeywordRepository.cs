@@ -8,8 +8,8 @@ namespace StudyShare.Infrastructure.Interfaces
 {
     public interface IPaperKeywordRepository
     {
-        Task<IEnumerable<Keyword>> GetKeywordsByPaperAsync(int paperId);
+        Task<List<Keyword>> GetKeywordsByPaperAsync(int paperId);
         Task AddKeywordsToPaperAsync(int paperId, List<int> keywordsId);
-        Task<IEnumerable<Paper>> GetPapersByKeywordsAsync(int keywordId);
+        Task<List<Paper>> GetPapersByKeywordsAsync(int keywordId);
     }
 }

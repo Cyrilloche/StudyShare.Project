@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Database;
 using StudyShare.Infrastructure.Interfaces;
@@ -19,37 +20,39 @@ namespace StudyShare.Infrastructure.Repositories
         {
             foreach (int keywordId in keywordsId)
             {
-                PaperKeyword paperKeyword = new PaperKeyword
+                if (!_context.PaperKeywords.Any(pk => pk.PaperId == paperId && pk.KeywordId == keywordId))
                 {
-                    PaperId = paperId,
-                    KeywordId = keywordId
-                };
-                await _context.PaperKeywords.AddAsync(paperKeyword);
-            };
+                    PaperKeyword paperKeyword = new PaperKeyword
+                    {
+                        PaperId = paperId,
+                        KeywordId = keywordId
+                    };
+                    await _context.PaperKeywords.AddAsync(paperKeyword);
+                }
+            }
             await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Keyword>> GetKeywordsByPaperAsync(int paperId)
+
+        public async Task<List<Keyword>> GetKeywordsByPaperAsync(int paperId)
         {
-            throw new NotImplementedException();
+            List<Keyword> keywords = await _context.PaperKeywords
+                                    .Where(p => p.PaperId == paperId)
+                                    .Select(s => s.Keyword)
+                                    .ToListAsync();
+
+            return keywords;
         }
 
-        public Task<IEnumerable<Paper>> GetPapersByKeywordsAsync(int keywordId)
+
+        public async Task<List<Paper>> GetPapersByKeywordsAsync(int keywordId)
         {
-            throw new NotImplementedException();
+            List<Paper> papers = await _context.PaperKeywords
+                                .Where(k => k.KeywordId == keywordId)
+                                .Select(s => s.Paper)
+                                .ToListAsync();
+
+            return papers;
         }
-
-        // public async Task<IEnumerable<Keyword>> GetKeywordsByPaperAsync(int paperId)
-        // {
-        //     IEnumerable<PaperKeyword> keywords = _context.PaperKeywords.Where(kw => kw.PaperId == paperId).ToList();
-        //     return null;
-
-        // }
-
-        // public async Task<IEnumerable<Paper>> GetPapersByKeywordsAsync(int keywordId)
-        // {
-        //     IEnumerable<Paper> papers = _context.PaperKeywords.Find(p => p.KeywordId == keywordId).ToList();
-        //     return null;
-        // }
     }
 }

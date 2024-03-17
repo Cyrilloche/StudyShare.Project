@@ -25,6 +25,9 @@ builder.Services.AddScoped<IPaperService, PaperService>();
 builder.Services.AddScoped<IKeywordRepository, KeywordRepository>();
 builder.Services.AddScoped<IKeywordService, KeywordService>();
 
+builder.Services.AddScoped<IPaperKeywordRepository, PaperKeywordRepository>();
+builder.Services.AddScoped<IPaperKeywordService, PaperKeywordService>();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
