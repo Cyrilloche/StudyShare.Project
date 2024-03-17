@@ -27,14 +27,7 @@ namespace StudyShare.Application.Services
         public async Task<List<KeywordDto>> GetKeywordsByPaperAsync(int paperId)
         {
             List<Keyword> keywords = await _paperKeywordRepository.GetKeywordsByPaperAsync(paperId);
-            List<KeywordDto> keywordDtos = new List<KeywordDto>();
-
-            foreach (Keyword keyword in keywords)
-            {
-                keywordDtos.Add(ObjectUtilities.MapObject<KeywordDto>(keyword));
-            }
-
-            return keywordDtos;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<KeywordDto, Keyword>(keywords).ToList();
         }
 
         public async Task<List<PaperDto>> GetPapersByKeywordsAsync(int keywordId)

@@ -3,6 +3,7 @@ using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Interfaces;
+using StudyShare.Application.Utilities;
 
 namespace StudyShare.Application.Services
 {
@@ -12,7 +13,7 @@ namespace StudyShare.Application.Services
         public UserClassLevelService(IUserClassLevelRepository userClassLevelRepository)
         {
             _userClassLevelRepository = userClassLevelRepository;
-        } 
+        }
 
         public async Task AddClassLevelToUserAsync(int userId, int classLevelId)
         {
@@ -22,29 +23,13 @@ namespace StudyShare.Application.Services
         public async Task<List<UserClassLevelDto>> GetClassesByUserAsync(int userId)
         {
             List<UserClassLevel> userClassLevels = await _userClassLevelRepository.GetClassesByUserAsync(userId);
-            List<UserClassLevelDto> userClassLevelDtos = new List<UserClassLevelDto>();
-
-            foreach (UserClassLevel userClassLevel in userClassLevels)
-            {
-                userClassLevelDtos.Add(ObjectUtilities.MapObject<UserClassLevelDto>(userClassLevel));
-                
-            }
-
-            return userClassLevelDtos;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<UserClassLevelDto, UserClassLevel>(userClassLevels).ToList();
         }
 
         public async Task<List<ClassLevelDto>> GetListOfClassByUserAsync(int userId)
         {
             List<ClassLevel> classLevels = await _userClassLevelRepository.GetListOfClassByUserAsync(userId);
-            List<ClassLevelDto> classLevelDtos = new List<ClassLevelDto>();
-
-            foreach (ClassLevel classLevel in classLevels)
-            {
-                classLevelDtos.Add(ObjectUtilities.MapObject<ClassLevelDto>(classLevel));
-                
-            } 
-
-            return classLevelDtos;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<ClassLevelDto, ClassLevel>(classLevels).ToList();
         }
     }
 }

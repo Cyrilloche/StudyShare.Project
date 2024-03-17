@@ -3,6 +3,7 @@ using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Interfaces;
+using StudyShare.Application.Utilities;
 
 namespace StudyShare.Application.Services
 {
@@ -26,28 +27,14 @@ namespace StudyShare.Application.Services
 
         public async Task<List<PaperDto>> GetAllPapers()
         {
-            List<PaperDto> paperDtos = new List<PaperDto>();
-            List<Paper> papers = await _paperRepository.GetAllPapers(); 
-
-            foreach (Paper paper in papers)
-            {
-                paperDtos.Add(ObjectUtilities.MapObject<PaperDto>(paper));
-            }
-
-            return paperDtos;
+            List<Paper> papers = await _paperRepository.GetAllPapers();
+            return DtosUtilities.ReturnIEnumerableDtosConverted<PaperDto, Paper>(papers).ToList();
         }
 
         public async Task<List<PaperDto>> GetPaperByAuthor(int userId)
         {
             List<Paper> papers = await _paperRepository.GetPaperByAuthor(userId);
-            
-            List<PaperDto> paperDtos = new List<PaperDto>(); 
-            foreach (Paper paper in papers)
-            {
-                paperDtos.Add(ObjectUtilities.MapObject<PaperDto>(paper));
-            }
-
-            return paperDtos;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<PaperDto, Paper>(papers).ToList();
         }
 
         public async Task<PaperDto> GetPaperById(int id)
@@ -60,7 +47,7 @@ namespace StudyShare.Application.Services
         {
             Paper paper = await _paperRepository.GetPaperById(id);
             ObjectUtilities.UpdateObject<Paper, UpdatePaperDto>(paper, paperDto);
-            
+
             await _paperRepository.UpdatePaper(paper);
         }
     }

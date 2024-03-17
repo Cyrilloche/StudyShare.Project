@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StudyShare.Application.Interfaces;
+using StudyShare.Application.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Domain.Utilities;
@@ -30,14 +31,7 @@ namespace StudyShare.Application.Services
         public async Task<List<KeywordDto>> GetAllKeywords()
         {
             List<Keyword> keywords = await _KeywordRepository.GetAllKeywords();
-            List<KeywordDto> keywordsDto = new List<KeywordDto>();
-
-            foreach (Keyword keyword in keywords)
-            {
-                keywordsDto.Add(ObjectUtilities.MapObject<KeywordDto>(keyword));
-            }
-
-            return keywordsDto;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<KeywordDto, Keyword>(keywords).ToList();
         }
     }
 }

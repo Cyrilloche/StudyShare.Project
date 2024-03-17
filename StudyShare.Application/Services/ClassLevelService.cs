@@ -3,6 +3,7 @@ using StudyShare.Domain.Utilities;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Infrastructure.Interfaces;
+using StudyShare.Application.Utilities;
 
 namespace StudyShare.Application.Services
 {
@@ -16,14 +17,7 @@ namespace StudyShare.Application.Services
         public async Task<List<ClassLevelDto>> GetAllClassLevel()
         {
             List<ClassLevel> classLevels = await _classLevelRepository.GetAllClassLevel();
-            List<ClassLevelDto> classLevelDto = new List<ClassLevelDto>();
-
-            foreach(ClassLevel classLevel in classLevels)
-            {
-                classLevelDto.Add(ObjectUtilities.MapObject<ClassLevelDto>(classLevel));
-            }
-
-            return classLevelDto;
+            return DtosUtilities.ReturnIEnumerableDtosConverted<ClassLevelDto, ClassLevel>(classLevels).ToList();
         }
 
         public async Task<ClassLevelDto> GetClassLevelById(int classLevelId)

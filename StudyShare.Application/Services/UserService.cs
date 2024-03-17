@@ -18,7 +18,7 @@ namespace StudyShare.Application.Services
 
         public async Task<User> CreateUser(UserDto userDto)
         {
-            
+
             if (!ServiceUtilities.IsValidName(userDto.UserLastname))
                 throw new BadRequestException("Invalid user lastname format");
             if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
@@ -33,24 +33,16 @@ namespace StudyShare.Application.Services
 
         public async Task DeleteUser(int id)
         {
-            if(!ServiceUtilities.IsValidId(id))
+            if (!ServiceUtilities.IsValidId(id))
                 throw new BadRequestException("Invalid id");
             await _userRepository.DeleteUser(id);
-            
+
         }
 
         public async Task<List<UserDto>> GetAllUsers()
         {
-           List<User> users = await _userRepository.GetAllUsers();
-
-           List<UserDto> usersDto = new List<UserDto>();
-
-           foreach (User user in users)
-           {
-                usersDto.Add(ObjectUtilities.MapObject<UserDto>(user));
-           }
-
-            return usersDto;
+            List<User> users = await _userRepository.GetAllUsers();
+            return DtosUtilities.ReturnIEnumerableDtosConverted<UserDto, User>(users).ToList();
         }
 
         public async Task<UserDto> GetUserById(int id)
@@ -66,19 +58,19 @@ namespace StudyShare.Application.Services
             if (!ServiceUtilities.IsValidId(id))
                 throw new BadRequestException("Invalid id");
 
-            if(userDto.UserFirstname != null)
+            if (userDto.UserFirstname != null)
                 if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
                     throw new BadRequestException("Invalid user firstname format");
 
-            if(userDto.UserLastname != null)
+            if (userDto.UserLastname != null)
                 if (!ServiceUtilities.IsValidName(userDto.UserLastname))
                     throw new BadRequestException("Invalid user lastname format");
 
-            if(userDto.UserEmail != null)
+            if (userDto.UserEmail != null)
                 if (!ServiceUtilities.IsValidName(userDto.UserEmail))
                     throw new BadRequestException("Invalid user email format");
 
-            if(userDto.UserPassword != null)
+            if (userDto.UserPassword != null)
                 if (!ServiceUtilities.IsValidName(userDto.UserPassword))
                     throw new BadRequestException("Invalid user password format");
 
