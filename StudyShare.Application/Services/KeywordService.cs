@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using StudyShare.Application.Interfaces;
 using StudyShare.Application.Utilities;
 using StudyShare.Domain.Dtos;

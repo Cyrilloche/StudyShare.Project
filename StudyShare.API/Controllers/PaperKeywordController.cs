@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Dtos;
-using StudyShare.Domain.Entities;
 
 namespace StudyShare.API.Controllers
 {

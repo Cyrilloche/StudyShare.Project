@@ -13,7 +13,7 @@ namespace StudyShare.Domain.Repositories
         {
             _context = context;
         }
-        
+
         public async Task<User> CreateUser(User user)
         {
             await _context.Users.AddAsync(user);
@@ -43,7 +43,7 @@ namespace StudyShare.Domain.Repositories
         }
 
         public async Task UpdateUser(User updateUser)
-        {  
+        {
             _context.Users.Update(updateUser);
             await _context.SaveChangesAsync();
         }

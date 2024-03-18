@@ -39,7 +39,7 @@ namespace StudyShare.Tests.Services
                 new User(),
                 new User()
             });
-            
+
             // Appel de la méthode GetAllUsers du service UserService à tester
             var result = _serviceMock.GetAllUsers();
 
@@ -91,7 +91,7 @@ namespace StudyShare.Tests.Services
         }
 
         // Méthodes de tests pour la méthode CreateUser
-        [TestMethod] 
+        [TestMethod]
         [DataRow("lastname", "a")]
         [DataRow("firstname", "a")]
         [DataRow("email", "wrongEmail")]
@@ -121,13 +121,13 @@ namespace StudyShare.Tests.Services
         public async Task CreateUser_WithValidFormat_ShouldNotThrowException()
         {
             // Arrange 
-            UserDto user = new UserDto {UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
+            UserDto user = new UserDto { UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
             _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
 
-           // Act
-           await _serviceMock.CreateUser(user);
+            // Act
+            await _serviceMock.CreateUser(user);
 
         }
     }
- }
+}
 
