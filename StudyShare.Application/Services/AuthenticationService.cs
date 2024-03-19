@@ -16,9 +16,11 @@ namespace StudyShare.Application.Services
     public class AuthenticationService : IAuthenticationService
     {
         private IAuthenticationRepository _authenticationRepository;
-        public AuthenticationService(IAuthenticationRepository authenticationRepository)
+        private IUserRepository _userRepository;
+        public AuthenticationService(IAuthenticationRepository authenticationRepository, IUserRepository userRepository)
         {
             _authenticationRepository = authenticationRepository;
+            _userRepository = userRepository;
         }
         public async Task<UserDto> LoginAsync(LoginDto loginDto)
         {
@@ -32,7 +34,10 @@ namespace StudyShare.Application.Services
         public async Task<UserDto> RegisterNewUserAsync(CreateUserDto createUserDto)
         {
             User user = ObjectUtilities.MapObject<User>(createUserDto);
+            var existingUser = await _authenticationRepository.GetUserByEmailAsync(createUserDto.UserEmail);
 
+            if (existingUser != null)
+                throw new BadRequestException("Email already exists");
             if (ServiceUtilities.IsNull(user))
                 throw new BadRequestException("Invalid datas");
             if (!ServiceUtilities.IsValidName(user.UserLastname))
@@ -46,9 +51,9 @@ namespace StudyShare.Application.Services
 
             user.UserPassword = HashUtilities.HashPassword(user.UserPassword);
 
+            await _authenticationRepository.RegisterNewUserAsync(user);
+
             return ObjectUtilities.MapObject<UserDto>(user);
-
-
         }
     }
 }
