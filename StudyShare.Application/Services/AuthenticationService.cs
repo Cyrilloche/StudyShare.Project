@@ -26,9 +26,11 @@ namespace StudyShare.Application.Services
         {
             User user = await _authenticationRepository.GetUserByEmailAsync(loginDto.UserEmail);
 
-            if (user.UserPassword == loginDto.UserPassword)
-                return ObjectUtilities.MapObject<UserDto>(user);
-            return null;
+            if (!HashUtilities.VerifyPassword(loginDto.UserPassword, user.UserPassword))
+                throw new BadRequestException("Invalid password. Please provide a valid password.");
+
+            return ObjectUtilities.MapObject<UserDto>(user);
+
         }
 
         public async Task<UserDto> RegisterNewUserAsync(CreateUserDto createUserDto)

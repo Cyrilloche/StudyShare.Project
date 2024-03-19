@@ -23,7 +23,6 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task RegisterNewUserAsync(User user)
         {
-            System.Console.WriteLine(user.UserPassword);
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }

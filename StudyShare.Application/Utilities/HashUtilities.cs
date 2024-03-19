@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace StudyShare.Application.Utilities
 {
     public class HashUtilities
     {
-        public static string HashPassword(string passwordUnencrypted) => BCrypt.Net.BCrypt.EnhancedHashPassword(passwordUnencrypted, 13);
-        public static bool VerifyPassword(string passwordEncrypted, string hashedPassword)
+        public static string HashPassword(string password) => BCrypt.Net.BCrypt.EnhancedHashPassword(password, 13);
+        public static bool VerifyPassword(string password, string passwordHash)
         {
-            return BCrypt.Net.BCrypt.EnhancedVerify(passwordEncrypted, hashedPassword);
+            bool check = BCrypt.Net.BCrypt.EnhancedVerify(password, passwordHash);
+            return check;
         }
     }
 }
