@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudyShare.Domain.Dtos;
 using StudyShare.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StudyShare.API.Controllers
 {
@@ -15,6 +16,7 @@ namespace StudyShare.API.Controllers
             _userService = userService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> GetAllUsers()
         {
