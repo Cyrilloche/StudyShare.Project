@@ -6,10 +6,8 @@ using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Dtos;
 using StudyShare.Domain.Entities;
 using StudyShare.Domain.Interfaces;
-using StudyShare.Domain.Repositories;
 using StudyShare.Domain.Utilities;
 using StudyShare.Infrastructure.Interfaces;
-using StudyShare.Infrastructure.Repositories;
 
 namespace StudyShare.Application.Services
 {
@@ -22,16 +20,13 @@ namespace StudyShare.Application.Services
             _authenticationRepository = authenticationRepository;
             _userRepository = userRepository;
         }
-
-        public async Task<UserDto> Login(LoginDto dataUser)
+        public async Task<UserDto> Login(LoginDto loginDto)
         {
-            User user = await _authenticationRepository.GetUserByEmailAsync(dataUser.UserEmail);
+            User user = await _authenticationRepository.GetUserByEmailAsync(loginDto.UserEmail);
 
-            if (dataUser.UserPassword == dataUser.UserPassword)
-                return ObjectUtilities.MapObject<UserDto>(await _userRepository.GetUserById(user.UserId));
-
+            if (user.UserPassword == loginDto.UserPassword)
+                return ObjectUtilities.MapObject<UserDto>(user);
             return null;
-
         }
     }
 }

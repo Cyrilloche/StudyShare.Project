@@ -8,6 +8,6 @@ namespace StudyShare.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task<UserDto> Login(LoginDto dataUser);
+        Task<UserDto> Login(LoginDto loginDto);
     }
 }
