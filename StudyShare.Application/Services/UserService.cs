@@ -61,6 +61,9 @@ namespace StudyShare.Application.Services
 
             User user = await _userRepository.GetUserById(id);
 
+            if (userDto.UserPassword != null)
+                userDto.UserPassword = HashUtilities.HashPassword(userDto.UserPassword);
+
             ObjectUtilities.UpdateObject<User, UpdateUserDto>(user, userDto);
 
             await _userRepository.UpdateUser(user);
