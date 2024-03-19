@@ -17,6 +17,11 @@ namespace StudyShare.Application.Services
         }
         public async Task<Paper> CreatePaper(PaperDto paper)
         {
+            if (!PaperUtilities.IsValidName(paper.PaperName))
+                throw new Exception("Invalid file name format");
+
+            PaperUtilities.FormattingPaperName(paper.PaperName, paper.PaperUploadDate);
+
             return await _paperRepository.CreatePaper(ObjectUtilities.MapObject<Paper>(paper));
         }
 

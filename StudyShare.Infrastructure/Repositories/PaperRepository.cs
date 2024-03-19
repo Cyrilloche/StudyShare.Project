@@ -16,9 +16,6 @@ namespace StudyShare.Infrastructure.Repositories
 
         public async Task<Paper> CreatePaper(Paper paper)
         {
-            paper.PaperUploadDate = DateTime.Now;
-            paper.PaperName = paper.PaperUploadDate.ToString("yyyyMMdd") + "_" + paper.PaperName;
-
             await _context.Papers.AddAsync(paper);
             await _context.SaveChangesAsync();
             return paper;

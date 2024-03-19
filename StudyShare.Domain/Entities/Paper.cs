@@ -5,8 +5,8 @@ namespace StudyShare.Domain.Entities
         public int PaperId { get; set; }
         public string PaperName { get; set; } = string.Empty;
         public string? PaperDescription { get; set; }
-        public string PaperPath { get; set; }  = string.Empty;
-        public DateTime PaperUploadDate { get; set; }
+        public string PaperPath { get; set; } = string.Empty;
+        public DateTime PaperUploadDate { get; init; } = DateTime.Now;
         public int PaperDownloadsNumber { get; set; }
         public bool PaperVisibility { get; set; }
 
