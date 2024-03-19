@@ -26,6 +26,9 @@ namespace StudyShare.Application.Services
         {
             User user = await _authenticationRepository.GetUserByEmailAsync(loginDto.UserEmail);
 
+            if (user == null)
+                throw new BadRequestException("User not found");
+
             if (!HashUtilities.VerifyPassword(loginDto.UserPassword, user.UserPassword))
                 throw new BadRequestException("Invalid password. Please provide a valid password.");
 
