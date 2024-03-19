@@ -20,5 +20,12 @@ namespace StudyShare.Infrastructure.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserEmail == email);
         }
+
+        public async Task RegisterNewUserAsync(User user)
+        {
+            System.Console.WriteLine(user.UserPassword);
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace StudyShare.Domain.Utilities
             {
                 // Obtenir la valeur de la propriété mise à jour
                 var updatedValue = property.GetValue(updatedObject);
-                
+
                 // Vérifier si la valeur mise à jour n'est pas nulle
                 if (updatedValue != null)
                 {
@@ -38,13 +38,13 @@ namespace StudyShare.Domain.Utilities
 
             // Obtenir le type de l'objet de destination
             Type type = typeof(T);
-            
+
             // Créer une nouvelle instance de l'objet de destination
             T obj = (T)Activator.CreateInstance(type)!;
 
             // Obtenir toutes les propriétés de l'objet DTO
             PropertyInfo[] dtoProperties = dto.GetType().GetProperties();
-            
+
             // Obtenir toutes les propriétés de l'objet de destination
             PropertyInfo[] objProperties = type.GetProperties();
 
@@ -60,8 +60,8 @@ namespace StudyShare.Domain.Utilities
                     // Obtenir la valeur de la propriété dans l'objet DTO
                     object value = dtoProp.GetValue(dto)!;
 
-                    // Vérifier si le nom de la propriété est différent de "password"
-                    if (objProp.Name.ToLower() != "password")
+                    // Vérifier si le nom de la propriété est différent de "userpassword"
+                    if (objProp.Name.ToLower() != "userpassword")
                     {
                         // Convertir la valeur en minuscules si elle est de type string
                         if (value != null && value is string v)

@@ -8,8 +8,19 @@ namespace StudyShare.Domain.Dtos
     public class LoginDto
     {
         public required string UserEmail { get; set; }
-
         public required string UserPassword { get; set; }
+    }
+    public class CreateUserDto
+    {
+        public string UserFirstname { get; set; }
+
+        public string UserLastname { get; set; }
+
+        public string UserEmail { get; set; }
+
+        public string UserPassword { get; set; }
+
+
 
     }
 }

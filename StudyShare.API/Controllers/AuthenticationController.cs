@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StudyShare.Application.Interfaces;
 using StudyShare.Domain.Dtos;
+using StudyShare.Domain.Entities;
 
 namespace StudyShare.API.Controllers
 {
@@ -18,10 +15,18 @@ namespace StudyShare.API.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpPost]
+        [HttpPost("SignIn")]
         public async Task<UserDto> Login(LoginDto loginDto)
         {
-            return await _authenticationService.Login(loginDto);
+            return await _authenticationService.LoginAsync(loginDto);
         }
+
+        [HttpPost("SignUp")]
+        public async Task<ActionResult<UserDto>> RegisterNewUser(CreateUserDto createUserDto)
+        {
+            UserDto newUser = await _authenticationService.RegisterNewUserAsync(createUserDto);
+            return CreatedAtAction("GetUserById", "User", new { id = newUser.UserId }, newUser);
+        }
+
     }
 }

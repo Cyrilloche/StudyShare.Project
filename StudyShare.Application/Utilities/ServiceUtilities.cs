@@ -29,5 +29,9 @@ namespace StudyShare.Application.Utilities
             string pattern = @"^[a-zA-Z]{3,30}";
             return Regex.IsMatch(name, pattern);
         }
+        public static bool IsNull<T>(T toControlObject)
+        {
+            return toControlObject == null;
+        }
     }
 }

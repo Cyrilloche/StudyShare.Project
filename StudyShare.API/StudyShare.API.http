@@ -1,6 +1,3 @@
 @StudyShare.API_HostAddress = http://localhost:5037
 
-GET {{StudyShare.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ###
