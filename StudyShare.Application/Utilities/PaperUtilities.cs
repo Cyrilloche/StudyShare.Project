@@ -13,9 +13,10 @@ namespace StudyShare.Application.Utilities
             string pattern = @"^[^<>:""/\\|?*\x00-\x1F]{1,255}$";
             return Regex.IsMatch(name, pattern);
         }
-        public static string FormattingPaperName(string name, DateTime dateTime)
+        public static string FormattingPaperName(string name)
         {
-            return dateTime.ToString("yyyyMMdd") + "_" + name.ToLower();
+            return DateTime.Now.ToString("yyyyMMdd") + "_" + name.Trim().ToLower().Replace(" ", "_");
         }
+
     }
 }

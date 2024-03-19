@@ -37,7 +37,7 @@ namespace StudyShare.API.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> CreatePaper(PaperDto paperDto)
+        public async Task<ActionResult> CreatePaper(CreatePaperDto paperDto)
         {
             if (paperDto != null)
                 return Ok(await _paperSerice.CreatePaper(paperDto));
