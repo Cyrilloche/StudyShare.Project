@@ -12,8 +12,8 @@ using StudyShare.Infrastructure.Database;
 namespace StudyShare.Infrastructure.Migrations
 {
     [DbContext(typeof(StudyShareDbContext))]
-    [Migration("20240306190217_InitilMigration")]
-    partial class InitilMigration
+    [Migration("20240319214635_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,11 +35,74 @@ namespace StudyShare.Infrastructure.Migrations
 
                     b.Property<string>("ClassLevelName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("ClassLevelId");
 
                     b.ToTable("ClassLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            ClassLevelId = 1,
+                            ClassLevelName = "CP"
+                        },
+                        new
+                        {
+                            ClassLevelId = 2,
+                            ClassLevelName = "CE1"
+                        },
+                        new
+                        {
+                            ClassLevelId = 3,
+                            ClassLevelName = "CE2"
+                        },
+                        new
+                        {
+                            ClassLevelId = 4,
+                            ClassLevelName = "CM1"
+                        },
+                        new
+                        {
+                            ClassLevelId = 5,
+                            ClassLevelName = "CM2"
+                        },
+                        new
+                        {
+                            ClassLevelId = 6,
+                            ClassLevelName = "6ème"
+                        },
+                        new
+                        {
+                            ClassLevelId = 7,
+                            ClassLevelName = "5ème"
+                        },
+                        new
+                        {
+                            ClassLevelId = 8,
+                            ClassLevelName = "4ème"
+                        },
+                        new
+                        {
+                            ClassLevelId = 9,
+                            ClassLevelName = "3ème"
+                        },
+                        new
+                        {
+                            ClassLevelId = 10,
+                            ClassLevelName = "2nde"
+                        },
+                        new
+                        {
+                            ClassLevelId = 11,
+                            ClassLevelName = "1ère"
+                        },
+                        new
+                        {
+                            ClassLevelId = 12,
+                            ClassLevelName = "Terminale"
+                        });
                 });
 
             modelBuilder.Entity("StudyShare.Domain.Entities.Keyword", b =>
@@ -57,6 +120,258 @@ namespace StudyShare.Infrastructure.Migrations
                     b.HasKey("KeywordId");
 
                     b.ToTable("Keywords");
+
+                    b.HasData(
+                        new
+                        {
+                            KeywordId = 1,
+                            KeywordName = "Lecture"
+                        },
+                        new
+                        {
+                            KeywordId = 2,
+                            KeywordName = "Écriture"
+                        },
+                        new
+                        {
+                            KeywordId = 3,
+                            KeywordName = "Grammaire"
+                        },
+                        new
+                        {
+                            KeywordId = 4,
+                            KeywordName = "Conjugaison"
+                        },
+                        new
+                        {
+                            KeywordId = 5,
+                            KeywordName = "Orthographe"
+                        },
+                        new
+                        {
+                            KeywordId = 6,
+                            KeywordName = "Vocabulaire"
+                        },
+                        new
+                        {
+                            KeywordId = 7,
+                            KeywordName = "Récit"
+                        },
+                        new
+                        {
+                            KeywordId = 8,
+                            KeywordName = "Poésie"
+                        },
+                        new
+                        {
+                            KeywordId = 9,
+                            KeywordName = "Résumé"
+                        },
+                        new
+                        {
+                            KeywordId = 10,
+                            KeywordName = "Dissertation"
+                        },
+                        new
+                        {
+                            KeywordId = 11,
+                            KeywordName = "Calcul"
+                        },
+                        new
+                        {
+                            KeywordId = 12,
+                            KeywordName = "Numération"
+                        },
+                        new
+                        {
+                            KeywordId = 13,
+                            KeywordName = "Géométrie"
+                        },
+                        new
+                        {
+                            KeywordId = 14,
+                            KeywordName = "Algèbre"
+                        },
+                        new
+                        {
+                            KeywordId = 15,
+                            KeywordName = "Proportionnalité"
+                        },
+                        new
+                        {
+                            KeywordId = 16,
+                            KeywordName = "Statistiques"
+                        },
+                        new
+                        {
+                            KeywordId = 17,
+                            KeywordName = "Probabilités"
+                        },
+                        new
+                        {
+                            KeywordId = 18,
+                            KeywordName = "Équations"
+                        },
+                        new
+                        {
+                            KeywordId = 19,
+                            KeywordName = "Inéquations"
+                        },
+                        new
+                        {
+                            KeywordId = 20,
+                            KeywordName = "Fonctions"
+                        },
+                        new
+                        {
+                            KeywordId = 21,
+                            KeywordName = "Préhistoire"
+                        },
+                        new
+                        {
+                            KeywordId = 22,
+                            KeywordName = "Antiquité"
+                        },
+                        new
+                        {
+                            KeywordId = 23,
+                            KeywordName = "Moyen Âge"
+                        },
+                        new
+                        {
+                            KeywordId = 24,
+                            KeywordName = "Renaissance"
+                        },
+                        new
+                        {
+                            KeywordId = 25,
+                            KeywordName = "Révolutions"
+                        },
+                        new
+                        {
+                            KeywordId = 26,
+                            KeywordName = "Guerres mondiales"
+                        },
+                        new
+                        {
+                            KeywordId = 27,
+                            KeywordName = "Décolonisation"
+                        },
+                        new
+                        {
+                            KeywordId = 28,
+                            KeywordName = "Histoire de France"
+                        },
+                        new
+                        {
+                            KeywordId = 29,
+                            KeywordName = "Histoire du monde"
+                        },
+                        new
+                        {
+                            KeywordId = 30,
+                            KeywordName = "Civilisations"
+                        },
+                        new
+                        {
+                            KeywordId = 31,
+                            KeywordName = "Cartographie"
+                        },
+                        new
+                        {
+                            KeywordId = 32,
+                            KeywordName = "Relief"
+                        },
+                        new
+                        {
+                            KeywordId = 33,
+                            KeywordName = "Climat"
+                        },
+                        new
+                        {
+                            KeywordId = 34,
+                            KeywordName = "Environnement"
+                        },
+                        new
+                        {
+                            KeywordId = 35,
+                            KeywordName = "Population"
+                        },
+                        new
+                        {
+                            KeywordId = 36,
+                            KeywordName = "Développement durable"
+                        },
+                        new
+                        {
+                            KeywordId = 37,
+                            KeywordName = "Mondialisation"
+                        },
+                        new
+                        {
+                            KeywordId = 38,
+                            KeywordName = "Géopolitique"
+                        },
+                        new
+                        {
+                            KeywordId = 39,
+                            KeywordName = "Ressources naturelles"
+                        },
+                        new
+                        {
+                            KeywordId = 40,
+                            KeywordName = "Aménagement du territoire"
+                        },
+                        new
+                        {
+                            KeywordId = 41,
+                            KeywordName = "Vocabulaire"
+                        },
+                        new
+                        {
+                            KeywordId = 42,
+                            KeywordName = "Grammaire"
+                        },
+                        new
+                        {
+                            KeywordId = 43,
+                            KeywordName = "Conjugaison"
+                        },
+                        new
+                        {
+                            KeywordId = 44,
+                            KeywordName = "Compréhension écrite"
+                        },
+                        new
+                        {
+                            KeywordId = 45,
+                            KeywordName = "Compréhension orale"
+                        },
+                        new
+                        {
+                            KeywordId = 46,
+                            KeywordName = "Expression écrite"
+                        },
+                        new
+                        {
+                            KeywordId = 47,
+                            KeywordName = "Expression orale"
+                        },
+                        new
+                        {
+                            KeywordId = 48,
+                            KeywordName = "Traduction"
+                        },
+                        new
+                        {
+                            KeywordId = 49,
+                            KeywordName = "Civilisation anglophone"
+                        },
+                        new
+                        {
+                            KeywordId = 50,
+                            KeywordName = "Langue des affaires"
+                        });
                 });
 
             modelBuilder.Entity("StudyShare.Domain.Entities.Paper", b =>
@@ -68,24 +383,30 @@ namespace StudyShare.Infrastructure.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("PaperId"));
 
                     b.Property<string>("PaperDescription")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<int>("PaperDownloadsNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("PaperName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("PaperPath")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<DateTime>("PaperUploadDate")
+                        .HasMaxLength(100)
                         .HasColumnType("datetime(6)");
 
                     b.Property<bool>("PaperVisibility")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -137,7 +458,8 @@ namespace StudyShare.Infrastructure.Migrations
 
                     b.Property<string>("SchoolName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("SchoolId");
 
@@ -154,41 +476,30 @@ namespace StudyShare.Infrastructure.Migrations
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("UserFirstname")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("UserLastname")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("UserPassword")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("UserRoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
                     b.ToTable("tbl_user");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            UserEmail = "cyril@gmail.com",
-                            UserFirstname = "Cyril",
-                            UserLastname = "CHERRIER",
-                            UserPassword = "motdepasse"
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            UserEmail = "leila@gmail.com",
-                            UserFirstname = "Leila",
-                            UserLastname = "BRAHO",
-                            UserPassword = "motdepasse"
-                        });
                 });
 
             modelBuilder.Entity("StudyShare.Domain.Entities.UserClassLevel", b =>
@@ -246,7 +557,8 @@ namespace StudyShare.Infrastructure.Migrations
 
                     b.Property<string>("WorkGroupName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("WorkGroupId");
 

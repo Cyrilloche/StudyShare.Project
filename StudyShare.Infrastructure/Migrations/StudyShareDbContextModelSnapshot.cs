@@ -122,132 +122,252 @@ namespace StudyShare.Infrastructure.Migrations
                         new
                         {
                             KeywordId = 1,
-                            KeywordName = "Français"
+                            KeywordName = "Lecture"
                         },
                         new
                         {
                             KeywordId = 2,
-                            KeywordName = "Maths"
+                            KeywordName = "Écriture"
                         },
                         new
                         {
                             KeywordId = 3,
-                            KeywordName = "Histoire"
+                            KeywordName = "Grammaire"
                         },
                         new
                         {
                             KeywordId = 4,
-                            KeywordName = "Géographie"
+                            KeywordName = "Conjugaison"
                         },
                         new
                         {
                             KeywordId = 5,
-                            KeywordName = "Anglais"
+                            KeywordName = "Orthographe"
                         },
                         new
                         {
                             KeywordId = 6,
-                            KeywordName = "EPS"
+                            KeywordName = "Vocabulaire"
                         },
                         new
                         {
                             KeywordId = 7,
-                            KeywordName = "Musique"
+                            KeywordName = "Récit"
                         },
                         new
                         {
                             KeywordId = 8,
-                            KeywordName = "Arts"
+                            KeywordName = "Poésie"
                         },
                         new
                         {
                             KeywordId = 9,
-                            KeywordName = "Sciences"
+                            KeywordName = "Résumé"
                         },
                         new
                         {
                             KeywordId = 10,
-                            KeywordName = "Physique"
+                            KeywordName = "Dissertation"
                         },
                         new
                         {
                             KeywordId = 11,
-                            KeywordName = "Chimie"
+                            KeywordName = "Calcul"
                         },
                         new
                         {
                             KeywordId = 12,
-                            KeywordName = "Biologie"
+                            KeywordName = "Numération"
                         },
                         new
                         {
                             KeywordId = 13,
-                            KeywordName = "Philosophie"
+                            KeywordName = "Géométrie"
                         },
                         new
                         {
                             KeywordId = 14,
-                            KeywordName = "Économie"
+                            KeywordName = "Algèbre"
                         },
                         new
                         {
                             KeywordId = 15,
-                            KeywordName = "Sociologie"
+                            KeywordName = "Proportionnalité"
                         },
                         new
                         {
                             KeywordId = 16,
-                            KeywordName = "Informatique"
+                            KeywordName = "Statistiques"
                         },
                         new
                         {
                             KeywordId = 17,
-                            KeywordName = "Technologie"
+                            KeywordName = "Probabilités"
                         },
                         new
                         {
                             KeywordId = 18,
-                            KeywordName = "Espagnol"
+                            KeywordName = "Équations"
                         },
                         new
                         {
                             KeywordId = 19,
-                            KeywordName = "Allemand"
+                            KeywordName = "Inéquations"
                         },
                         new
                         {
                             KeywordId = 20,
-                            KeywordName = "Italien"
+                            KeywordName = "Fonctions"
                         },
                         new
                         {
                             KeywordId = 21,
-                            KeywordName = "Chinois"
+                            KeywordName = "Préhistoire"
                         },
                         new
                         {
                             KeywordId = 22,
-                            KeywordName = "Russe"
+                            KeywordName = "Antiquité"
                         },
                         new
                         {
                             KeywordId = 23,
-                            KeywordName = "Latin"
+                            KeywordName = "Moyen Âge"
                         },
                         new
                         {
                             KeywordId = 24,
-                            KeywordName = "Grec"
+                            KeywordName = "Renaissance"
                         },
                         new
                         {
                             KeywordId = 25,
-                            KeywordName = "Éthique"
+                            KeywordName = "Révolutions"
                         },
                         new
                         {
                             KeywordId = 26,
-                            KeywordName = "Civisme"
+                            KeywordName = "Guerres mondiales"
+                        },
+                        new
+                        {
+                            KeywordId = 27,
+                            KeywordName = "Décolonisation"
+                        },
+                        new
+                        {
+                            KeywordId = 28,
+                            KeywordName = "Histoire de France"
+                        },
+                        new
+                        {
+                            KeywordId = 29,
+                            KeywordName = "Histoire du monde"
+                        },
+                        new
+                        {
+                            KeywordId = 30,
+                            KeywordName = "Civilisations"
+                        },
+                        new
+                        {
+                            KeywordId = 31,
+                            KeywordName = "Cartographie"
+                        },
+                        new
+                        {
+                            KeywordId = 32,
+                            KeywordName = "Relief"
+                        },
+                        new
+                        {
+                            KeywordId = 33,
+                            KeywordName = "Climat"
+                        },
+                        new
+                        {
+                            KeywordId = 34,
+                            KeywordName = "Environnement"
+                        },
+                        new
+                        {
+                            KeywordId = 35,
+                            KeywordName = "Population"
+                        },
+                        new
+                        {
+                            KeywordId = 36,
+                            KeywordName = "Développement durable"
+                        },
+                        new
+                        {
+                            KeywordId = 37,
+                            KeywordName = "Mondialisation"
+                        },
+                        new
+                        {
+                            KeywordId = 38,
+                            KeywordName = "Géopolitique"
+                        },
+                        new
+                        {
+                            KeywordId = 39,
+                            KeywordName = "Ressources naturelles"
+                        },
+                        new
+                        {
+                            KeywordId = 40,
+                            KeywordName = "Aménagement du territoire"
+                        },
+                        new
+                        {
+                            KeywordId = 41,
+                            KeywordName = "Vocabulaire"
+                        },
+                        new
+                        {
+                            KeywordId = 42,
+                            KeywordName = "Grammaire"
+                        },
+                        new
+                        {
+                            KeywordId = 43,
+                            KeywordName = "Conjugaison"
+                        },
+                        new
+                        {
+                            KeywordId = 44,
+                            KeywordName = "Compréhension écrite"
+                        },
+                        new
+                        {
+                            KeywordId = 45,
+                            KeywordName = "Compréhension orale"
+                        },
+                        new
+                        {
+                            KeywordId = 46,
+                            KeywordName = "Expression écrite"
+                        },
+                        new
+                        {
+                            KeywordId = 47,
+                            KeywordName = "Expression orale"
+                        },
+                        new
+                        {
+                            KeywordId = 48,
+                            KeywordName = "Traduction"
+                        },
+                        new
+                        {
+                            KeywordId = 49,
+                            KeywordName = "Civilisation anglophone"
+                        },
+                        new
+                        {
+                            KeywordId = 50,
+                            KeywordName = "Langue des affaires"
                         });
                 });
 
@@ -377,26 +497,6 @@ namespace StudyShare.Infrastructure.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("tbl_user");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            UserEmail = "cyril@gmail.com",
-                            UserFirstname = "Cyril",
-                            UserLastname = "CHERRIER",
-                            UserPassword = "motdepasse",
-                            UserRoleId = 0
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            UserEmail = "leila@gmail.com",
-                            UserFirstname = "Leila",
-                            UserLastname = "BRAHO",
-                            UserPassword = "motdepasse",
-                            UserRoleId = 0
-                        });
                 });
 
             modelBuilder.Entity("StudyShare.Domain.Entities.UserClassLevel", b =>

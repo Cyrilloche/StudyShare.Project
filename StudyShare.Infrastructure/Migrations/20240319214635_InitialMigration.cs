@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudyShare.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitilMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +23,7 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     ClassLevelId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClassLevelName = table.Column<string>(type: "longtext", nullable: false)
+                    ClassLevelName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -52,7 +53,7 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     SchoolId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    SchoolName = table.Column<string>(type: "longtext", nullable: false)
+                    SchoolName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -67,14 +68,15 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserLastname = table.Column<string>(type: "longtext", nullable: false)
+                    UserLastname = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserFirstname = table.Column<string>(type: "longtext", nullable: false)
+                    UserFirstname = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserEmail = table.Column<string>(type: "longtext", nullable: false)
+                    UserEmail = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserPassword = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    UserPassword = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserRoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,7 +90,7 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     WorkGroupId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    WorkGroupName = table.Column<string>(type: "longtext", nullable: false)
+                    WorkGroupName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -103,15 +105,15 @@ namespace StudyShare.Infrastructure.Migrations
                 {
                     PaperId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PaperName = table.Column<string>(type: "longtext", nullable: false)
+                    PaperName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PaperDescription = table.Column<string>(type: "longtext", nullable: true)
+                    PaperDescription = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PaperPath = table.Column<string>(type: "longtext", nullable: false)
+                    PaperPath = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PaperUploadDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    PaperUploadDate = table.Column<DateTime>(type: "datetime(6)", maxLength: 100, nullable: false),
                     PaperDownloadsNumber = table.Column<int>(type: "int", nullable: false),
-                    PaperVisibility = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PaperVisibility = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -252,12 +254,79 @@ namespace StudyShare.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "tbl_user",
-                columns: new[] { "UserId", "UserEmail", "UserFirstname", "UserLastname", "UserPassword" },
+                table: "ClassLevels",
+                columns: new[] { "ClassLevelId", "ClassLevelName" },
                 values: new object[,]
                 {
-                    { 1, "cyril@gmail.com", "Cyril", "CHERRIER", "motdepasse" },
-                    { 2, "leila@gmail.com", "Leila", "BRAHO", "motdepasse" }
+                    { 1, "CP" },
+                    { 2, "CE1" },
+                    { 3, "CE2" },
+                    { 4, "CM1" },
+                    { 5, "CM2" },
+                    { 6, "6ème" },
+                    { 7, "5ème" },
+                    { 8, "4ème" },
+                    { 9, "3ème" },
+                    { 10, "2nde" },
+                    { 11, "1ère" },
+                    { 12, "Terminale" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Keywords",
+                columns: new[] { "KeywordId", "KeywordName" },
+                values: new object[,]
+                {
+                    { 1, "Lecture" },
+                    { 2, "Écriture" },
+                    { 3, "Grammaire" },
+                    { 4, "Conjugaison" },
+                    { 5, "Orthographe" },
+                    { 6, "Vocabulaire" },
+                    { 7, "Récit" },
+                    { 8, "Poésie" },
+                    { 9, "Résumé" },
+                    { 10, "Dissertation" },
+                    { 11, "Calcul" },
+                    { 12, "Numération" },
+                    { 13, "Géométrie" },
+                    { 14, "Algèbre" },
+                    { 15, "Proportionnalité" },
+                    { 16, "Statistiques" },
+                    { 17, "Probabilités" },
+                    { 18, "Équations" },
+                    { 19, "Inéquations" },
+                    { 20, "Fonctions" },
+                    { 21, "Préhistoire" },
+                    { 22, "Antiquité" },
+                    { 23, "Moyen Âge" },
+                    { 24, "Renaissance" },
+                    { 25, "Révolutions" },
+                    { 26, "Guerres mondiales" },
+                    { 27, "Décolonisation" },
+                    { 28, "Histoire de France" },
+                    { 29, "Histoire du monde" },
+                    { 30, "Civilisations" },
+                    { 31, "Cartographie" },
+                    { 32, "Relief" },
+                    { 33, "Climat" },
+                    { 34, "Environnement" },
+                    { 35, "Population" },
+                    { 36, "Développement durable" },
+                    { 37, "Mondialisation" },
+                    { 38, "Géopolitique" },
+                    { 39, "Ressources naturelles" },
+                    { 40, "Aménagement du territoire" },
+                    { 41, "Vocabulaire" },
+                    { 42, "Grammaire" },
+                    { 43, "Conjugaison" },
+                    { 44, "Compréhension écrite" },
+                    { 45, "Compréhension orale" },
+                    { 46, "Expression écrite" },
+                    { 47, "Expression orale" },
+                    { 48, "Traduction" },
+                    { 49, "Civilisation anglophone" },
+                    { 50, "Langue des affaires" }
                 });
 
             migrationBuilder.CreateIndex(
