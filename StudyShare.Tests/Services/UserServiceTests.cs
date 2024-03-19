@@ -89,45 +89,6 @@ namespace StudyShare.Tests.Services
             //Assert
             Assert.AreEqual("Invalid id", exception.Message);
         }
-
-        // Méthodes de tests pour la méthode CreateUser
-        [TestMethod]
-        [DataRow("lastname", "a")]
-        [DataRow("firstname", "a")]
-        [DataRow("email", "wrongEmail")]
-        [DataRow("password", "weak")]
-        public async Task CreateUser_WithInvalidInput_ShouldThrowException(string field, string invalidValue)
-        {
-            // Arrange 
-            UserDto user = new UserDto
-            {
-                UserId = 1,
-                UserLastname = field == "lastname" ? invalidValue : "valid",
-                UserFirstname = field == "firstname" ? invalidValue : "valid",
-                UserPassword = field == "password" ? invalidValue : "Strong1@",
-                UserEmail = field == "email" ? invalidValue : "valid@email.fr"
-            };
-            _repositoryMock.Setup(repo => repo.CreateUser(new User())).ReturnsAsync(new User());
-
-            // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.CreateUser(user));
-
-            // Assert
-            Assert.AreEqual($"Invalid user {field} format", exception.Message);
-        }
-
-
-        [TestMethod]
-        public async Task CreateUser_WithValidFormat_ShouldNotThrowException()
-        {
-            // Arrange 
-            UserDto user = new UserDto { UserId = 1, UserLastname = "user", UserFirstname = "user", UserPassword = "Strong1@", UserEmail = "valid@email.fr" };
-            _repositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>())).ReturnsAsync(new User());
-
-            // Act
-            await _serviceMock.CreateUser(user);
-
-        }
     }
 }
 

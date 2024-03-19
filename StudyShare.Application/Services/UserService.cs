@@ -16,21 +16,6 @@ namespace StudyShare.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<User> CreateUser(UserDto userDto)
-        {
-
-            if (!ServiceUtilities.IsValidName(userDto.UserLastname))
-                throw new BadRequestException("Invalid user lastname format");
-            if (!ServiceUtilities.IsValidName(userDto.UserFirstname))
-                throw new BadRequestException("Invalid user firstname format");
-            if (!ServiceUtilities.IsValidEmail(userDto.UserEmail))
-                throw new BadRequestException("Invalid user email format");
-            if (!ServiceUtilities.IsValidPassword(userDto.UserPassword))
-                throw new BadRequestException("Invalid user password format");
-
-            return await _userRepository.CreateUser(ObjectUtilities.MapObject<User>(userDto));
-        }
-
         public async Task DeleteUser(int id)
         {
             if (!ServiceUtilities.IsValidId(id))

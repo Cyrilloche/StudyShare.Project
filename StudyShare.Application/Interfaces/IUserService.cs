@@ -9,6 +9,5 @@ namespace StudyShare.Application.Interfaces
         Task<UserDto> GetUserById(int id);
         Task UpdateUser(int id, UpdateUserDto user);
         Task DeleteUser(int id);
-        Task<User> CreateUser(UserDto user);
     }
 }

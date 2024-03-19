@@ -4,7 +4,6 @@ namespace StudyShare.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> CreateUser(User user);
         Task DeleteUser(int id);
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(int id);

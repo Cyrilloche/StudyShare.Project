@@ -16,11 +16,9 @@ namespace StudyShare.Application.Services
     public class AuthenticationService : IAuthenticationService
     {
         private IAuthenticationRepository _authenticationRepository;
-        private IUserRepository _userRepository;
-        public AuthenticationService(IAuthenticationRepository authenticationRepository, IUserRepository userRepository)
+        public AuthenticationService(IAuthenticationRepository authenticationRepository)
         {
             _authenticationRepository = authenticationRepository;
-            _userRepository = userRepository;
         }
         public async Task<UserDto> LoginAsync(LoginDto loginDto)
         {

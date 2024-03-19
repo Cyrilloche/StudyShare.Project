@@ -31,16 +31,6 @@ namespace StudyShare.API.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateUser(UserDto user)
-        {
-            if (user != null)
-            {
-                return Ok(await _userService.CreateUser(user));
-            }
-            return BadRequest();
-        }
-
         [HttpDelete]
         public async Task DeleteUser(int id)
         {
@@ -53,6 +43,6 @@ namespace StudyShare.API.Controllers
             await _userService.UpdateUser(id, userDto);
         }
 
-        
+
     }
 }
