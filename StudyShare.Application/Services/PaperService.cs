@@ -15,45 +15,45 @@ namespace StudyShare.Application.Services
         {
             _paperRepository = paperRepository;
         }
-        public async Task<Paper> CreatePaper(CreatePaperDto paper)
+        public async Task<Paper> CreatePaperAsync(CreatePaperDto paper)
         {
             if (!PaperUtilities.IsValidName(paper.PaperName))
                 throw new Exception("Invalid file name format");
 
             paper.PaperName = PaperUtilities.FormattingPaperName(paper.PaperName);
 
-            return await _paperRepository.CreatePaper(ObjectUtilities.MapObject<Paper>(paper));
+            return await _paperRepository.CreatePaperAsync(ObjectUtilities.MapObject<Paper>(paper));
         }
 
-        public async Task DeletePaper(int id)
+        public async Task DeletePaperAsync(int id)
         {
-            await _paperRepository.DeletePaper(id);
+            await _paperRepository.DeletePaperAsync(id);
         }
 
-        public async Task<List<PaperDto>> GetAllPapers()
+        public async Task<List<PaperDto>> GetAllPapersAsync()
         {
-            List<Paper> papers = await _paperRepository.GetAllPapers();
+            List<Paper> papers = await _paperRepository.GetAllPapersASync();
             return DtosUtilities.ReturnIEnumerableDtosConverted<PaperDto, Paper>(papers).ToList();
         }
 
-        public async Task<List<PaperDto>> GetPaperByAuthor(int userId)
+        public async Task<List<PaperDto>> GetPaperByAuthorAsync(int userId)
         {
-            List<Paper> papers = await _paperRepository.GetPaperByAuthor(userId);
+            List<Paper> papers = await _paperRepository.GetPaperByAuthorAsync(userId);
             return DtosUtilities.ReturnIEnumerableDtosConverted<PaperDto, Paper>(papers).ToList();
         }
 
-        public async Task<PaperDto> GetPaperById(int id)
+        public async Task<PaperDto> GetPaperByIdAsync(int id)
         {
-            Paper paper = await _paperRepository.GetPaperById(id);
+            Paper paper = await _paperRepository.GetPaperByIdAsync(id);
             return ObjectUtilities.MapObject<PaperDto>(paper);
         }
 
-        public async Task UpdatePaper(int id, UpdatePaperDto paperDto)
+        public async Task UpdatePaperAsync(int id, UpdatePaperDto paperDto)
         {
-            Paper paper = await _paperRepository.GetPaperById(id);
+            Paper paper = await _paperRepository.GetPaperByIdAsync(id);
             ObjectUtilities.UpdateObject<Paper, UpdatePaperDto>(paper, paperDto);
 
-            await _paperRepository.UpdatePaper(paper);
+            await _paperRepository.UpdatePaperAsync(paper);
         }
     }
 }

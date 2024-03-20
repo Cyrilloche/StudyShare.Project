@@ -12,7 +12,7 @@ namespace StudyShare.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<School?> GetSchoolOfUser(int userId)
+        public async Task<School?> GetSchoolOfUserAsync(int userId)
         {
             var userSchool = await _context.UserSchools.FirstOrDefaultAsync(school => school.UserId == userId);
             var school = await _context.Schools.FirstOrDefaultAsync(school => school.SchoolId == userSchool.SchoolId);

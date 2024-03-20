@@ -5,8 +5,8 @@ namespace StudyShare.Application.Interfaces
 {
     public interface IKeywordService
     {
-        Task<List<KeywordDto>> GetAllKeywords();
-        Task<Keyword> AddKeyword(KeywordDto keywordDto);
-        Task DeleteKeyword(int keywordId);
+        Task<List<KeywordDto>> GetAllKeywordsAsync();
+        Task<Keyword> AddKeywordAsync(KeywordDto keywordDto);
+        Task DeleteKeywordAsync(int keywordId);
     }
 }

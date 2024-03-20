@@ -4,7 +4,7 @@ namespace StudyShare.Application.Interfaces
 {
     public interface IClassLevelService
     {
-        Task<List<ClassLevelDto>> GetAllClassLevel();
-        Task<ClassLevelDto> GetClassLevelById(int classLevelId);
+        Task<List<ClassLevelDto>> GetAllClassLevelAsync();
+        Task<ClassLevelDto> GetClassLevelByIdAsync(int classLevelId);
     }
 }

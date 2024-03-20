@@ -4,11 +4,11 @@ namespace StudyShare.Infrastructure.Interfaces
 {
     public interface ISchoolRepository
     {
-        Task<List<School>> GetAllSchools();
-        Task<School> GetSchoolById(int schoolId);
-        Task<List<School>> GetSchoolByName(string schoolName);
-        Task<School> CreateSchool(School school);
-        Task DeleteSchool(int id);
-        Task UpdateSchool(int id, School school);
+        Task<List<School>> GetAllSchoolsAsync();
+        Task<School> GetSchoolByIdAsync(int schoolId);
+        Task<List<School>> GetSchoolByNameAsync(string schoolName);
+        Task<School> CreateSchoolAsync(School school);
+        Task DeleteSchoolAsync(int id);
+        Task UpdateSchoolAsync(int id, School school);
     }
 }

@@ -16,29 +16,29 @@ namespace StudyShare.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeleteUserAsync(int id)
         {
             if (!ServiceUtilities.IsValidId(id))
                 throw new BadRequestException("Invalid id");
-            await _userRepository.DeleteUser(id);
+            await _userRepository.DeleteUserAsync(id);
 
         }
 
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsersAsync()
         {
-            List<User> users = await _userRepository.GetAllUsers();
+            List<User> users = await _userRepository.GetAllUsersAsync();
             return DtosUtilities.ReturnIEnumerableDtosConverted<UserDto, User>(users).ToList();
         }
 
-        public async Task<UserDto> GetUserById(int id)
+        public async Task<UserDto> GetUserByIdAsync(int id)
         {
             if (!ServiceUtilities.IsValidId(id))
                 throw new BadRequestException("Invalid id");
 
-            return ObjectUtilities.MapObject<UserDto>(await _userRepository.GetUserById(id));
+            return ObjectUtilities.MapObject<UserDto>(await _userRepository.GetUserByIdAsync(id));
         }
 
-        public async Task UpdateUser(int id, UpdateUserDto userDto)
+        public async Task UpdateUserAsync(int id, UpdateUserDto userDto)
         {
             if (!ServiceUtilities.IsValidId(id))
                 throw new BadRequestException("Invalid id");
@@ -59,14 +59,14 @@ namespace StudyShare.Application.Services
                 if (!ServiceUtilities.IsValidName(userDto.UserPassword))
                     throw new BadRequestException("Invalid user password format");
 
-            User user = await _userRepository.GetUserById(id);
+            User user = await _userRepository.GetUserByIdAsync(id);
 
             if (userDto.UserPassword != null)
                 userDto.UserPassword = HashUtilities.HashPassword(userDto.UserPassword);
 
             ObjectUtilities.UpdateObject<User, UpdateUserDto>(user, userDto);
 
-            await _userRepository.UpdateUser(user);
+            await _userRepository.UpdateUserAsync(user);
 
         }
 

@@ -5,9 +5,9 @@ namespace StudyShare.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<List<UserDto>> GetAllUsers();
-        Task<UserDto> GetUserById(int id);
-        Task UpdateUser(int id, UpdateUserDto user);
-        Task DeleteUser(int id);
+        Task<List<UserDto>> GetAllUsersAsync();
+        Task<UserDto> GetUserByIdAsync(int id);
+        Task UpdateUserAsync(int id, UpdateUserDto user);
+        Task DeleteUserAsync(int id);
     }
 }

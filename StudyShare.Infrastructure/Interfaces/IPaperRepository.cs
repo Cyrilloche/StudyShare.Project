@@ -4,11 +4,11 @@ namespace StudyShare.Infrastructure.Interfaces
 {
     public interface IPaperRepository
     {
-        Task<Paper> CreatePaper(Paper paper);
-        Task DeletePaper(int id);
-        Task<List<Paper>> GetAllPapers();
-        Task<List<Paper>> GetPaperByAuthor(int userId);
-        Task<Paper> GetPaperById(int id);
-        Task UpdatePaper(Paper paper);
+        Task<Paper> CreatePaperAsync(Paper paper);
+        Task DeletePaperAsync(int id);
+        Task<List<Paper>> GetAllPapersASync();
+        Task<List<Paper>> GetPaperByAuthorAsync(int userId);
+        Task<Paper> GetPaperByIdAsync(int id);
+        Task UpdatePaperAsync(Paper paper);
     }
 }

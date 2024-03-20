@@ -4,8 +4,8 @@ namespace StudyShare.Infrastructure.Interfaces
 {
     public interface IKeywordRepository
     {
-        Task<List<Keyword>> GetAllKeywords();
-        Task<Keyword> AddKeyword(Keyword keyword);
-        Task DeleteKeyword(int keywordId);
+        Task<List<Keyword>> GetAllKeywordsAsync();
+        Task<Keyword> AddKeywordAsync(Keyword keyword);
+        Task DeleteKeywordAsync(int keywordId);
     }
 }

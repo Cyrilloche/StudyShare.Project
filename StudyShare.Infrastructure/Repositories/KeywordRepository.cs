@@ -13,7 +13,7 @@ namespace StudyShare.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Keyword> AddKeyword(Keyword keyword)
+        public async Task<Keyword> AddKeywordAsync(Keyword keyword)
         {
             await _context.Keywords.AddRangeAsync(keyword);
             await _context.SaveChangesAsync();
@@ -22,7 +22,7 @@ namespace StudyShare.Infrastructure.Repositories
 
         }
 
-        public async Task DeleteKeyword(int keywordId)
+        public async Task DeleteKeywordAsync(int keywordId)
         {
             Keyword keyword = await _context.Keywords.FirstOrDefaultAsync(k => k.KeywordId == keywordId);
             if (keyword != null)
@@ -33,7 +33,7 @@ namespace StudyShare.Infrastructure.Repositories
 
         }
 
-        public async Task<List<Keyword>> GetAllKeywords()
+        public async Task<List<Keyword>> GetAllKeywordsAsync()
         {
             return await _context.Keywords.ToListAsync();
         }

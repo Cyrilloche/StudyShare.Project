@@ -20,14 +20,14 @@ namespace StudyShare.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<UserDto>>> GetAllUsers()
         {
-            List<UserDto> users = await _userService.GetAllUsers();
+            List<UserDto> users = await _userService.GetAllUsersAsync();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
-            UserDto user = await _userService.GetUserById(id);
+            UserDto user = await _userService.GetUserByIdAsync(id);
             if (user == null)
                 throw new Exception();
             return Ok(user);
@@ -36,13 +36,13 @@ namespace StudyShare.API.Controllers
         [HttpDelete]
         public async Task DeleteUser(int id)
         {
-            await _userService.DeleteUser(id);
+            await _userService.DeleteUserAsync(id);
         }
 
         [HttpPut]
         public async Task UpdateUser(int id, UpdateUserDto userDto)
         {
-            await _userService.UpdateUser(id, userDto);
+            await _userService.UpdateUserAsync(id, userDto);
         }
 
 

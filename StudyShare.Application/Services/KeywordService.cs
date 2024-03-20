@@ -14,7 +14,7 @@ namespace StudyShare.Application.Services
         {
             _KeywordRepository = keywordRepository;
         }
-        public async Task<Keyword> AddKeyword(KeywordDto keywordDto)
+        public async Task<Keyword> AddKeywordAsync(KeywordDto keywordDto)
         {
             if (keywordDto is null)
                 throw new Exception("Keyword cannot be empty.");
@@ -24,17 +24,17 @@ namespace StudyShare.Application.Services
 
             keywordDto.KeywordName = KeywordUtilities.FormattingKeyword(keywordDto.KeywordName);
 
-            return await _KeywordRepository.AddKeyword(ObjectUtilities.MapObject<Keyword>(keywordDto));
+            return await _KeywordRepository.AddKeywordAsync(ObjectUtilities.MapObject<Keyword>(keywordDto));
         }
 
-        public async Task DeleteKeyword(int keywordId)
+        public async Task DeleteKeywordAsync(int keywordId)
         {
-            await _KeywordRepository.DeleteKeyword(keywordId);
+            await _KeywordRepository.DeleteKeywordAsync(keywordId);
         }
 
-        public async Task<List<KeywordDto>> GetAllKeywords()
+        public async Task<List<KeywordDto>> GetAllKeywordsAsync()
         {
-            List<Keyword> keywords = await _KeywordRepository.GetAllKeywords();
+            List<Keyword> keywords = await _KeywordRepository.GetAllKeywordsAsync();
             return DtosUtilities.ReturnIEnumerableDtosConverted<KeywordDto, Keyword>(keywords).ToList();
         }
     }

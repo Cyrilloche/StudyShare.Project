@@ -19,13 +19,13 @@ namespace StudyShare.API.Controllers
         [HttpGet]
         public async Task<List<ClassLevelDto>> GetAllClassLevel()
         {
-            return await _classLevelService.GetAllClassLevel();
+            return await _classLevelService.GetAllClassLevelAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ClassLevelDto> GetClassLevelById(int id)
         {
-            return await _classLevelService.GetClassLevelById(id);
+            return await _classLevelService.GetClassLevelByIdAsync(id);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace StudyShare.Infrastructure.Interfaces
     {
         Task<User> GetUserByEmailAsync(string email);
         Task RegisterNewUserAsync(User user);
+        Task RegisterNewAdminAsync(User user);
     }
 }

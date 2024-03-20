@@ -14,9 +14,9 @@ namespace StudyShare.Domain.Repositories
             _context = context;
         }
 
-        public async Task DeleteUser(int id)
+        public async Task DeleteUserAsync(int id)
         {
-            User user = await GetUserById(id);
+            User user = await GetUserByIdAsync(id);
             if (user != null)
             {
                 _context.Users.Remove(user);
@@ -24,18 +24,18 @@ namespace StudyShare.Domain.Repositories
             }
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<User>> GetAllUsersAsync()
         {
             return await _context.Users.ToListAsync();
         }
 
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
 
-        public async Task UpdateUser(User updateUser)
+        public async Task UpdateUserAsync(User updateUser)
         {
             _context.Users.Update(updateUser);
             await _context.SaveChangesAsync();

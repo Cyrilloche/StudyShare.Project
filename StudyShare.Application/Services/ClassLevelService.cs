@@ -14,15 +14,15 @@ namespace StudyShare.Application.Services
         {
             _classLevelRepository = classLevelRepository;
         }
-        public async Task<List<ClassLevelDto>> GetAllClassLevel()
+        public async Task<List<ClassLevelDto>> GetAllClassLevelAsync()
         {
-            List<ClassLevel> classLevels = await _classLevelRepository.GetAllClassLevel();
+            List<ClassLevel> classLevels = await _classLevelRepository.GetAllClassLevelAsync();
             return DtosUtilities.ReturnIEnumerableDtosConverted<ClassLevelDto, ClassLevel>(classLevels).ToList();
         }
 
-        public async Task<ClassLevelDto> GetClassLevelById(int classLevelId)
+        public async Task<ClassLevelDto> GetClassLevelByIdAsync(int classLevelId)
         {
-            ClassLevel classLevel = await _classLevelRepository.GetClassLevelById(classLevelId);
+            ClassLevel classLevel = await _classLevelRepository.GetClassLevelByIdAsync(classLevelId);
 
             return ObjectUtilities.MapObject<ClassLevelDto>(classLevel);
         }

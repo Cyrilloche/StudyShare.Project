@@ -35,13 +35,13 @@ namespace StudyShare.Tests.Services
         {
             // Configuration du comportement du mock du UserRepository pour la méthode GetAllUsers
             // Retourner une liste d'utilisateurs lorsqu'elle est appelée
-            _repositoryMock.Setup(repo => repo.GetAllUsers()).ReturnsAsync(new List<User> {
+            _repositoryMock.Setup(repo => repo.GetAllUsersAsync()).ReturnsAsync(new List<User> {
                 new User(),
                 new User()
             });
 
             // Appel de la méthode GetAllUsers du service UserService à tester
-            var result = _serviceMock.GetAllUsers();
+            var result = _serviceMock.GetAllUsersAsync();
 
             // Vérification que le résultat n'est pas nul
             // Assert.IsNotNull(result.Result);
@@ -52,9 +52,9 @@ namespace StudyShare.Tests.Services
         [TestMethod]
         public void GetAllUsers_WithNoUsers_ShouldReturnEmptyList()
         {
-            _repositoryMock.Setup(repo => repo.GetAllUsers()).ReturnsAsync(new List<User>());
+            _repositoryMock.Setup(repo => repo.GetAllUsersAsync()).ReturnsAsync(new List<User>());
 
-            var result = _serviceMock.GetAllUsers();
+            var result = _serviceMock.GetAllUsersAsync();
 
             Assert.AreEqual(0, result.Result.Count());
         }
@@ -66,10 +66,10 @@ namespace StudyShare.Tests.Services
         {
             // Arrange
             int id = -1;
-            _repositoryMock.Setup(repo => repo.GetUserById(id));
+            _repositoryMock.Setup(repo => repo.GetUserByIdAsync(id));
 
             // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.GetUserById(id));
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.GetUserByIdAsync(id));
 
             //Assert
             Assert.AreEqual("Invalid id", exception.Message);
@@ -81,10 +81,10 @@ namespace StudyShare.Tests.Services
         {
             // Arrange
             int id = -1;
-            _repositoryMock.Setup(repo => repo.DeleteUser(id));
+            _repositoryMock.Setup(repo => repo.DeleteUserAsync(id));
 
             // Act
-            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.DeleteUser(id));
+            var exception = await Assert.ThrowsExceptionAsync<BadRequestException>(async () => await _serviceMock.DeleteUserAsync(id));
 
             //Assert
             Assert.AreEqual("Invalid id", exception.Message);
