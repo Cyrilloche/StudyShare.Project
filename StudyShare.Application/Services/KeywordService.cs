@@ -16,6 +16,14 @@ namespace StudyShare.Application.Services
         }
         public async Task<Keyword> AddKeyword(KeywordDto keywordDto)
         {
+            if (keywordDto is null)
+                throw new Exception("Keyword cannot be empty.");
+            if (!KeywordUtilities.IsValidKeywordFormat(keywordDto.KeywordName))
+                throw new Exception("Invalid keyword format.Keyword should contain only letters or digits, at least 2 caracters with a maximum length of 30 characters");
+
+
+            keywordDto.KeywordName = KeywordUtilities.FormattingKeyword(keywordDto.KeywordName);
+
             return await _KeywordRepository.AddKeyword(ObjectUtilities.MapObject<Keyword>(keywordDto));
         }
 
