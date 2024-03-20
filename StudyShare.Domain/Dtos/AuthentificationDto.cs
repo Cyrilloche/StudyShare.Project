@@ -9,6 +9,7 @@ namespace StudyShare.Domain.Dtos
     {
         public required string UserEmail { get; set; }
         public required string UserPassword { get; set; }
+        public int UserRoleId { get; set; }
     }
     public class CreateUserDto
     {
@@ -19,8 +20,6 @@ namespace StudyShare.Domain.Dtos
         public string UserEmail { get; set; }
 
         public string UserPassword { get; set; }
-
-
 
     }
 }

@@ -11,5 +11,6 @@ namespace StudyShare.Application.Interfaces
     {
         Task<UserDto> LoginAsync(LoginDto loginDto);
         Task<UserDto> RegisterNewUserAsync(CreateUserDto createUserDto);
+        Task<UserDto> RegisterNewAdminAsync(CreateUserDto createUserDto);
     }
 }

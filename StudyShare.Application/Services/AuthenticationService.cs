@@ -36,6 +36,32 @@ namespace StudyShare.Application.Services
 
         }
 
+        public async Task<UserDto> RegisterNewAdminAsync(CreateUserDto createUserDto)
+        {
+            User user = ObjectUtilities.MapObject<User>(createUserDto);
+            var existingUser = await _authenticationRepository.GetUserByEmailAsync(createUserDto.UserEmail);
+
+            if (existingUser != null)
+                throw new BadRequestException("Email already exists");
+            if (ServiceUtilities.IsNull(user))
+                throw new BadRequestException("Invalid datas");
+            if (!ServiceUtilities.IsValidName(user.UserLastname))
+                throw new BadRequestException("Invalid user lastname format");
+            if (!ServiceUtilities.IsValidName(user.UserFirstname))
+                throw new BadRequestException("Invalid user firstname format");
+            if (!ServiceUtilities.IsValidEmail(user.UserEmail))
+                throw new BadRequestException("Invalid user email format");
+            if (!ServiceUtilities.IsValidPassword(user.UserPassword))
+                throw new BadRequestException("Invalid user password format");
+
+            user.UserPassword = HashUtilities.HashPassword(user.UserPassword);
+            user.UserRoleId = 1;
+
+            await _authenticationRepository.RegisterNewUserAsync(user);
+
+            return ObjectUtilities.MapObject<UserDto>(user);
+        }
+
         public async Task<UserDto> RegisterNewUserAsync(CreateUserDto createUserDto)
         {
             User user = ObjectUtilities.MapObject<User>(createUserDto);

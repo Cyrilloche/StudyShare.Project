@@ -25,8 +25,8 @@ namespace StudyShare.API.Controllers
         [HttpPost("SignIn")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            await _authenticationService.LoginAsync(loginDto);
-            string token = CreateToken(loginDto);
+            UserDto userDto = await _authenticationService.LoginAsync(loginDto);
+            string token = CreateToken(userDto);
             return Ok(token);
         }
 
@@ -37,12 +37,20 @@ namespace StudyShare.API.Controllers
             return CreatedAtAction("GetUserById", "User", new { id = newUser.UserId }, newUser);
         }
 
-        private string CreateToken(LoginDto user)
+        [HttpPost("SignUpAdmin")]
+        public async Task<ActionResult<UserDto>> RegisterNewAdmin(CreateUserDto createUserDto)
         {
+            UserDto newAdmin = await _authenticationService.RegisterNewAdminAsync(createUserDto);
+            return CreatedAtAction("GetUserById", "User", new { id = newAdmin.UserId }, newAdmin);
+        }
+
+        private string CreateToken(UserDto user)
+        {
+            var userRole = user.UserRoleId == 1 ? "Admin" : "User";
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.UserEmail),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, userRole)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
