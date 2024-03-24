@@ -92,12 +92,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseCors(opt =>
-{
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:5500");
-});
+// app.UseCors(opt =>
+// {
+//     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:5500");
+// });
 
 app.UseHttpsRedirection();
+
+app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
