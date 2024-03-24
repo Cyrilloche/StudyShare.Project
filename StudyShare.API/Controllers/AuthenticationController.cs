@@ -23,7 +23,7 @@ namespace StudyShare.API.Controllers
         }
 
         [HttpPost("SignIn")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login([FromBody]LoginDto loginDto)
         {
             UserDto userDto = await _authenticationService.LoginAsync(loginDto);
             string token = CreateToken(userDto);
@@ -49,6 +49,7 @@ namespace StudyShare.API.Controllers
             var userRole = user.UserRoleId == 1 ? "Admin" : "User";
             List<Claim> claims = new List<Claim>
             {
+                new Claim("UserId", user.UserId.ToString()),
                 new Claim(ClaimTypes.Email, user.UserEmail),
                 new Claim(ClaimTypes.Role, userRole)
             };
