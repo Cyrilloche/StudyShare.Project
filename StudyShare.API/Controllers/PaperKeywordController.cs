@@ -26,7 +26,7 @@ namespace StudyShare.API.Controllers
             return await _paperKeywordService.GetPapersByKeywordsAsync(keywordId);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task AddKeywordsToPaper(int paperId, List<int> keywordsId)
         {
             await _paperKeywordService.AddKeywordsToPaperAsync(paperId, keywordsId);

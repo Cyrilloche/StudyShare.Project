@@ -26,7 +26,7 @@ namespace StudyShare.API.Controllers
             return await _paperClassLevelService.GetPapersByClassLevelAsync(classLevelId);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task AddClassLeveltoPaper(List<int> classLevelIds, int paperId)
         {
             await _paperClassLevelService.AddClassLevelToPaperAsync(classLevelIds, paperId);
