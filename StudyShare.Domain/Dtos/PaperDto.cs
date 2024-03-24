@@ -28,6 +28,9 @@ namespace StudyShare.Domain.Dtos
         public string PaperName { get; set; } = string.Empty;
         public string? PaperDescription { get; set; }
         public bool PaperVisibility { get; set; }
+        public int UserId { get; set; }
+
+
 
 
     }
