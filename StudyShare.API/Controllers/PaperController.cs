@@ -29,6 +29,7 @@ namespace StudyShare.API.Controllers
             return BadRequest();
         }
 
+
         [HttpGet("authorId")]
         public async Task<ActionResult<List<PaperDto>>> GetPapersByAuthor(int authorId)
         {
@@ -40,7 +41,11 @@ namespace StudyShare.API.Controllers
         public async Task<ActionResult> CreatePaper(CreatePaperDto paperDto)
         {
             if (paperDto != null)
+            {
+                System.Console.WriteLine(paperDto.PaperName);
+                System.Console.WriteLine(paperDto.PaperUploadDate);
                 return Ok(await _paperSerice.CreatePaperAsync(paperDto));
+            }
             return BadRequest();
         }
 

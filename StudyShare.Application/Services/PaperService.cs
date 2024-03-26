@@ -20,8 +20,6 @@ namespace StudyShare.Application.Services
             if (!PaperUtilities.IsValidName(paper.PaperName))
                 throw new Exception("Invalid file name format");
 
-            paper.PaperName = PaperUtilities.FormattingPaperName(paper.PaperName);
-
             return await _paperRepository.CreatePaperAsync(ObjectUtilities.MapObject<Paper>(paper));
         }
 
